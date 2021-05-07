@@ -1,44 +1,8 @@
 require_relative('./tests/my_tests.rb')
 require_relative('./lib/cat.rb')
 require_relative('./lib/player.rb')
-
-class Game
-    attr_reader :game
-    def initialize(player_1, player_2, game_type="competition")
-        @player_1 = player_1
-        @player_2 = player_2
-        @game = game_type == "competition" ? Competition.new(player_1, player_2) : Playfight.new(player_1.cat, player_2.cat)
-    end
-end
-
-class Playfight
-    attr_accessor :cat1, :cat2
-    def initialize(cat1, cat2)
-        @cat1, @cat2 = cat1, cat2
-    end
-
-    def chance_to_win(cat)
-        luck = [1, 250, 500, 750, 1000].sample
-        points = ((cat.strength + cat.agility) * cat.confidence) + (luck * 10)
-    end
-
-    def compete
-        cat_1_chance_to_win = chance_to_win(@cat1)
-        cat_2_chance_to_win = chance_to_win(@cat2)
-
-        if cat_1_chance_to_win > cat_2_chance_to_win
-            @cat1.wins += 1
-            @cat2.losses += 1
-            return "#{@cat1.name} wins!"
-        elsif cat_1_chance_to_win < cat_2_chance_to_win
-            @cat2.wins += 1
-            @cat1.losses += 1
-            return "#{@cat2.name} wins!"
-        else
-            return "it's a tie!!!"
-        end
-    end
-end
+require_relative('./lib/game.rb')
+require_relative('./lib/playfight.rb')
 
 class Competition
     attr_accessor :player_1, :player_2
