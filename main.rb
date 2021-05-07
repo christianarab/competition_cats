@@ -77,8 +77,6 @@ def test_player_setup
     MyTest.expect_equal(player_profile_2.has_cat?, "Player has selected cat")
 end
 
-
-
 def test_competition
     # Starts new game (Competition) with player 1, player 2, arg. to denote game type
     puts "======TEST COMPETITION======"
@@ -88,7 +86,6 @@ def test_competition
     puts "Is ln. 212 game_instance running an instance of Competition?"
     puts game_instance.game.instance_of?(Competition)
 end
-
 
 def test_playfight
     # Starts new game (Playfight) with player 1, player 2, arg. to denote game type
@@ -115,10 +112,10 @@ def test_class_competition
 end
 
 def run
-  test_player_setup
-  test_playfight
-  test_competition
-  test_class_competition
+    test_player_setup
+    test_playfight
+    test_competition
+    test_class_competition
 end
 
 run
