@@ -4,15 +4,7 @@ require_relative('./lib/player.rb')
 require_relative('./lib/game.rb')
 require_relative('./lib/playfight.rb')
 require_relative('./lib/againstmice.rb')
-
-class Competition
-    attr_accessor :player_1, :player_2
-
-    def initialize(player_1, player_2)
-        @player_1 = player_1
-        @player_2 = player_2
-    end
-end
+require_relative('./lib/competition.rb')
 
 def test_player_setup
     # Profile setup: two players - one with cat, one without
