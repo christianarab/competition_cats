@@ -26,7 +26,6 @@ def run
                 user_input = gets.chomp
                 new_player = Player.new(user_input)
                 puts "meow!! welcome #{new_player.name}"
-                puts new_player.has_cat?
             else
             end
         when 'p'
