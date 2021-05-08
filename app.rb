@@ -17,13 +17,11 @@ def run
         when 'q'
             break
         when 'c'
-                Player.create
-                Cat.create_cat
-                puts Player.cats.inspect
+            Cat.create_cat
         when 'p'
-            against_mice_menu
-        when 'l'
-            puts "list players! meow, to be implimented"
+            Againstmice.run
+        when 'n'
+            Player.create
         when 'm'
             puts MENU
         else
