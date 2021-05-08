@@ -17,7 +17,7 @@ def run
         when 'q'
             break
         when 'c'
-            create_user_menu
+            Player.create_user
         when 'p'
             against_mice_menu
         when 'l'
