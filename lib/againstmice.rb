@@ -1,3 +1,5 @@
+require_relative('./cat')
+
 class Againstmice
     attr_accessor :tally, :cat1, :cat2
     
@@ -24,7 +26,7 @@ class Againstmice
         mice
     end
     
-    def comp(*tally)
+    def compete(*tally)
         @tally = 0
         mice1 = spawn
         mice2 = spawn
@@ -40,8 +42,8 @@ class Againstmice
     end
     
     def results
-        puts cat_1_chance_to_win = comp(@cat1)
-        puts cat_2_chance_to_win = comp(@cat2)
+        puts cat_1_chance_to_win = compete(@cat1)
+        puts cat_2_chance_to_win = compete(@cat2)
         
         if cat_1_chance_to_win > cat_2_chance_to_win
             puts "Cat 1 wins, Cat 2 looses"
@@ -49,4 +51,20 @@ class Againstmice
             puts "Cat 2 wins, Cat 1 looses"
         end
     end
+
+    def run
+        spawn
+        compete
+        results
+    end
+end
+
+def against_mice_menu
+    puts "against mice!"
+    puts "enter player one's cat name"
+    cat_one = gets.chomp
+    puts "enter player two's cat name"
+    cat_two = gets.chomp
+    against_mice = Againstmice.new(Cat.new(cat_one), Cat.new(cat_two))
+    against_mice.run
 end

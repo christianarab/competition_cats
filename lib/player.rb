@@ -27,3 +27,17 @@ class Player
         puts cat.to_s
     end
 end
+
+def create_user_menu
+    puts "create a player!\n"
+    puts "would you like to create a new player? (y/n)"
+    user_input = gets.chomp
+    if user_input == 'y'
+        puts "what would you like to name your player? "
+        user_input = gets.chomp
+        new_player = Player.new(user_input)
+        puts "meow!! welcome #{new_player.name}"
+        new_player.has_cat?
+    elsif user_input == 'n'
+    end
+end
