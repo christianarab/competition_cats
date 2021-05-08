@@ -1,6 +1,8 @@
+require_relative('player.rb')
+
 class Cat
     attr_reader :size, :agility, :strength, :confidence
-    attr_accessor :wins, :losses, :energy, :tally, :name
+    attr_accessor :wins, :losses, :energy, :tally, :name, :player
 
     def initialize(name)
         @name = name
@@ -12,6 +14,15 @@ class Cat
         @agility = agility
         @strength = strength
         @tally = 0
+    end
+
+    def self.create_cat 
+        user_input = ''
+        puts "Player has no cat. Please name your cat:"
+        cat_name = gets.chomp
+        Player.cats(cat_name)
+        puts "meow meow... meow meow MEOWWWWW"
+        puts "meow welcome to the human world #{cat_name}"
     end
 
     def agility
@@ -57,4 +68,5 @@ class Cat
     def to_s
         "name: #{@name}, size: #{@size}, energy: #{@energy}, agility: #{@agility}, strength: #{@strength}, confidence: #{@confidence}, wins: #{@wins}, losses: #{@losses}"
     end
+    
 end

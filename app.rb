@@ -17,7 +17,9 @@ def run
         when 'q'
             break
         when 'c'
-            Player.create
+                Player.create
+                Cat.create_cat
+                puts Player.cats.inspect
         when 'p'
             against_mice_menu
         when 'l'
@@ -31,3 +33,4 @@ def run
 end
 
 run
+
