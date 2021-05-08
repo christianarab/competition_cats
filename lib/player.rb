@@ -1,18 +1,17 @@
 require_relative ('cat.rb')
 
-
 class Player
-    attr_accessor :name, :cat
+    attr_accessor :name, :cats, :players
 
     def initialize(name)
         @name = name
-        @player = []
-        @cat = []
+        @cats = []
+
     end
 
     def self.create_cat(player_name='')
         user_input = ''
-        if @cat = []
+        if @cats.is_empty?
             puts "Player has no cat. Please name your cat:"
             user_input = gets.chomp
             new_cat = Cat.new(user_input)
@@ -32,23 +31,19 @@ class Player
 
     def self.save
         File.open('./saves/players', 'a') do |file|
-            file.write("#{@cat} \n")
+            file.write("#{@players} \n")
         end
     end
 
-    def self.create_user
+    def self.create
         puts "create a player!\n"
         puts "would you like to create a new player? (y/n)"
         user_input = gets.chomp
         if user_input == 'y'
             puts "what would you like to name your player? "
             user_input = gets.chomp
-            new_player = Player.new(user_input)
-            player_name = new_player.name
-            puts "meow!! welcome #{player_name}"
-            create_cat(player_name)
-            show_cat
-            save
+            player = Player.new(user_input)
+             @players=[] << player
         elsif user_input == 'n'
         end
     end
