@@ -1,6 +1,6 @@
 class Cat
-    attr_reader :name, :size, :agility, :strength, :confidence
-    attr_accessor :wins, :losses, :energy, :tally
+    attr_reader :size, :agility, :strength, :confidence
+    attr_accessor :wins, :losses, :energy, :tally, :name
 
     def initialize(name)
         @name = name
