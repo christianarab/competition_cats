@@ -1,4 +1,4 @@
-require_relative('./cat')
+require_relative('cat')
 
 class Againstmice
     attr_accessor :tally, :cat1, :cat2, :mice
@@ -38,7 +38,7 @@ class Againstmice
                 puts "Mouse ran away!"
             end
         end
-        @tally
+        return @tally
     end
     
     def self.results

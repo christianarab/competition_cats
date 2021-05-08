@@ -18,6 +18,7 @@ def run
             break
         when 'c'
             Cat.create_cat
+            Player.print_cats
         when 'p'
             Againstmice.run
         when 'n'

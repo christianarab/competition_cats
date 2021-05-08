@@ -1,20 +1,21 @@
 require_relative('cat.rb')
 
 class Player
-    attr_accessor :name, :cats, :players
+    attr_accessor :name, :cat
 
     def initialize(name)
         @name = name
+        @cats = []
     end
 
-    def self.save
-        File.open('./saves/players', 'a') do |file|
-            file.write("#{ } \n")
+    def self.save(cat)
+        File.open('./saves/cat', 'a') do |file|
+            file.write("#{cat}\n")
         end
     end
 
-    def self.cats(cat_name='')
-        Cat.new(cat_name)
+    def self.cats(to_add)
+        @cats = [] << to_add
     end
 
     def self.create
