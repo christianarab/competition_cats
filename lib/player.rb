@@ -3,9 +3,9 @@ require_relative('cat.rb')
 class Player
     attr_accessor :name, :cat
 
-    def initialize(name, cat=nil)
+    def initialize(name, cat_name)
         @name = name
-        @cat = Cat.new(cat)
+        @cat = Cat.new(cat_name)
     end
 
     def self.create

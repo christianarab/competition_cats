@@ -1,9 +1,7 @@
 class Playfight
-    attr_accessor :player_1, :player_2
-    def initialize(player_1, player_2)
-        @cat1, @cat2 = player_1, player_2
-        puts @cat1.inspect
-        puts @cat2.inspect
+    attr_accessor :cat1, :cat2
+    def initialize(cat1, cat2)
+        @cat1, @cat2 = cat1, cat2
     end
 
     def chance_to_win(cat)

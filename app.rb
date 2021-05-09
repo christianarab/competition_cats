@@ -36,3 +36,16 @@ class App
 end
 
 App.run
+    def self.run_tests
+        puts "-------------Start of run_tests--------------"
+        sparky = Cat.new("Sparky")
+        puts "TEST 1: I expect Sparky to be initalized to have 100 energy points.\n"
+        MyTest.expect_equal(sparky.energy, 100)
+        puts "TEST 2: I expect Againstmice game to run and print result.\n"
+        MyTest.expect_equal(Againstmice.run, Againstmice.results)
+    end
+end
+
+App.run_tests
+App.run
+
