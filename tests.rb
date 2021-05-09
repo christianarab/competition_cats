@@ -9,6 +9,12 @@ require_relative('./lib/competition.rb')
 run_tests
 
 def run_tests
+    christian = Player.new("christian")
+    computer = Player.new("computer")
+
+    Cat.create_cat
+    Cat.save
+
     puts "-------------Start of run_tests--------------"
     sparky = Cat.new("Sparky")
     puts "TEST 1: Expect Sparky to be initalized to have 100 energy points.\n"

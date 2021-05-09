@@ -9,6 +9,7 @@ require_relative('./lib/menu.rb')
 
 class App
     def self.run
+        puts "Running Competition Cats!"
         while true do
             puts MENU
             user_input = gets.chomp

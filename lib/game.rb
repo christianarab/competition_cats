@@ -14,9 +14,3 @@ class Game
     end
 
 end
-
-    christian = Player.new("christian")
-    computer = Player.new("computer")
-
-    Cat.create_cat
-    Cat.save

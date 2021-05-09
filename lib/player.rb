@@ -31,7 +31,7 @@ class Player
         loaded_players = self.load
         puts "These are the current players:"
         loaded_players.each_with_index do |player, index|
-            puts "\t#{index+1}) #{player.name} #{player.cat.name}"
+            puts "\t#{index+1}) #{player.name}"
         end
     end
 
