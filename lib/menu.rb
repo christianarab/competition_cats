@@ -5,10 +5,13 @@ Competition Cats!
 
 ﾐㅇ ༝ ㅇﾐ meow meow meow
 
-   (n) create a player 
-   (c) create cats
-   (p) play a game of against mice!
-   (l) list players
+   (n)  create a player 
+   (l)  list players
+   (c)  create cats
+   
+   (g1) play a game of against mice!
+   (g2) play competition!
+
     
    (q) quit    (m) display menu
 menu

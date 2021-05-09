@@ -5,13 +5,7 @@ class Player
 
     def initialize(name)
         @name = name
-        @cats = []
-    end
-
-    def self.save(cat)
-        File.open('./saves/cat', 'a') do |file|
-            file.write("#{cat}\n")
-        end
+        @cats
     end
 
     def self.cats(to_add)
@@ -30,4 +24,6 @@ class Player
         elsif user_input == 'n'
         end
     end
+
+
 end

@@ -15,7 +15,7 @@ class Cat
         @strength = strength
         @tally = 0
     end
-
+    
     def self.create_cat 
         user_input = ''
         puts "Please name your cat: "
