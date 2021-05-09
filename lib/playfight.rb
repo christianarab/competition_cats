@@ -1,7 +1,9 @@
 class Playfight
     attr_accessor :player_1, :player_2
-    def initialize(player_1, cat2)
-        @cat1, @cat2 = cat1, cat2
+    def initialize(player_1, player_2)
+        @cat1, @cat2 = player_1, player_2
+        puts @cat1.inspect
+        puts @cat2.inspect
     end
 
     def chance_to_win(cat)
@@ -9,18 +11,18 @@ class Playfight
         points = ((cat.strength + cat.agility) * cat.confidence) + (luck * 10)
     end
 
-    def self.run(player_1, player_2)
-        cat_1_chance_to_win = chance_to_win(@player_1.cat)
-        cat_2_chance_to_win = chance_to_win(@player_2.cat)
+    def run
+        cat_1_chance_to_win = chance_to_win(@cat1)
+        cat_2_chance_to_win = chance_to_win(@cat2)
 
         if cat_1_chance_to_win > cat_2_chance_to_win
-            @player_1.cat.wins += 1
-            @player_2.losses += 1
-            return "#{@player_1.cat.name} wins!"
+            @cat1.wins += 1
+            @cat2.losses += 1
+            return "#{@cat1.cat.name} wins!"
         elsif cat_1_chance_to_win < cat_2_chance_to_win
-            @player_2.wins += 1
-            @player_1.losses += 1
-            return "#{@player_2.cat.name} wins!"
+            @cat2.wins += 1
+            @cat1.losses += 1
+            return "#{@cat2.cat.name} wins!"
         else
             return "it's a tie!!!"
         end

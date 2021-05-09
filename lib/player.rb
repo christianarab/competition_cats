@@ -5,7 +5,7 @@ class Player
 
     def initialize(name, cat=nil)
         @name = name
-        @cat = cat = nil ? nil : Cat.new(cat)
+        @cat = Cat.new(cat)
     end
 
     def self.create
