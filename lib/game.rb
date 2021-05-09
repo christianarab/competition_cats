@@ -1,8 +1,20 @@
+require_relative('againstmice.rb')
+require_relative('playfight.rb')
+
 class Game
-    attr_reader :game
-    def initialize(player_1, player_2, game_type="competition")
+    attr_accessor :player_1, :player_2
+    
+    def initialize(player_1, player_2)
         @player_1 = player_1
         @player_2 = player_2
-        @game = game_type == "competition" ? Competition.new(player_1, player_2) : Playfight.new(player_1.cat, player_2.cat)
     end
+
+    # def game_playfight
+    #     Playfight.run
+    # end
+
+    # def game_mice
+    #     Againstmice.run
+    # end
+
 end

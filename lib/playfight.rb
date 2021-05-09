@@ -9,18 +9,18 @@ class Playfight
         points = ((cat.strength + cat.agility) * cat.confidence) + (luck * 10)
     end
 
-    def compete
-        cat_1_chance_to_win = chance_to_win(@cat1)
-        cat_2_chance_to_win = chance_to_win(@cat2)
+    def self.run(player_1, player_2)
+        cat_1_chance_to_win = chance_to_win(@player_1.cat)
+        cat_2_chance_to_win = chance_to_win(@player_2.cat)
 
         if cat_1_chance_to_win > cat_2_chance_to_win
-            @cat1.wins += 1
-            @cat2.losses += 1
-            return "#{@cat1.name} wins!"
+            @player_1.cat.wins += 1
+            @player_2.losses += 1
+            return "#{@player_1.cat.name} wins!"
         elsif cat_1_chance_to_win < cat_2_chance_to_win
-            @cat2.wins += 1
-            @cat1.losses += 1
-            return "#{@cat2.name} wins!"
+            @player_2.wins += 1
+            @player_1.losses += 1
+            return "#{@player_2.cat.name} wins!"
         else
             return "it's a tie!!!"
         end
