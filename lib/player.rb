@@ -1,15 +1,10 @@
 require_relative('cat.rb')
 
 class Player
-    attr_accessor :name, :cat
+    attr_accessor :name, :cats
 
     def initialize(name)
         @name = name
-        @cats
-    end
-
-    def self.cats(to_add)
-        @cats = [] << to_add
     end
 
     def self.create
@@ -25,5 +20,22 @@ class Player
         end
     end
 
+    def self.list
+        loaded_players = self.load
+        puts "These are the current players:"
+        loaded_players.each_with_index do |player, index|
+            puts "\t#{index+1}) #{player.name}"
+        end
+    end
 
+    def self.load
+        players = []
+        File.open('./saves/players', 'r') do |file|
+          file.each do |line|
+            name = line
+            players << Player.new(name)
+          end
+        end
+        players
+    end
 end

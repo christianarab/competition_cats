@@ -18,12 +18,14 @@ def run
             break
         when 'c'
             Cat.create_cat
-        when 'p'
+        when '1'
             Againstmice.run
+        when 'l'
+            Player.load
+            Player.list
         when 'n'
             Player.create
         when 'm'
-            puts MENU
         else
             puts "It broke! ouch"
         end
