@@ -2,10 +2,8 @@ require_relative('cat.rb')
 
 class Player
     attr_accessor :name, :cat
-
-    def initialize(name, cat_name)
+    def initialize(name)
         @name = name
-        @cat = Cat.new(cat_name)
     end
 
     def self.create
@@ -16,14 +14,17 @@ class Player
         if user_input == 'y'
             puts "what would you like to name your player? "
             player_name = gets.chomp
-            puts "what would you like to name your cat? "
-            cat_name = gets.chomp
-            player = Player.new(player_name, cat_name)
+            player = Player.new(player_name)
             player_array=[] << player
         elsif user_input == 'n'
-        end
-        puts player_array.inspect
         player_array
+        end
+    end
+
+    def self.add_cat
+        puts "would you like to add a cat to your profile? meow!"
+        #  list cats
+        # select cat
     end
 
     def self.list

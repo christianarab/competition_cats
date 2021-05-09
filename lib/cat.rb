@@ -2,7 +2,7 @@ require_relative('player.rb')
 
 class Cat
     attr_reader :size, :agility, :strength, :confidence
-    attr_accessor :wins, :losses, :energy, :tally, :name, :cat
+    attr_accessor :wins, :losses, :energy, :tally, :name, :cats
 
     def initialize(name)
         @name = name
@@ -14,20 +14,23 @@ class Cat
         @agility = agility
         @strength = strength
         @tally = 0
+        @cats = []
     end
     
     def self.create_cat 
+        @cats = []
         user_input = ''
         puts "Please name your cat: "
         cat_name = gets.chomp
         meow_made = Cat.new(cat_name)
         puts "meow meow... meow meow MEOWWWWW"
         puts "meow welcome to the human world #{meow_made.name}"
+        @cats << meow_made.to_s
     end
     
-    def self.save(cat)
-        File.open('./saves/cat', 'a') do |file|
-            file.write("#{cat}\n")
+    def self.save
+        File.open('.././saves/cats', 'a') do |file|
+            file.write("#{@cats}\n")
         end
     end
 

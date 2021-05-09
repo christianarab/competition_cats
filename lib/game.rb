@@ -9,15 +9,14 @@ class Game
         Playfight.run(player_1, player_2)
     end
 
-    # def game_mice
-    #     Againstmice.run
-    # end
+    def game_mice
+        Againstmice.run
+    end
 
 end
 
     christian = Player.new("christian")
     computer = Player.new("computer")
-    
 
-    new_playfight = Playfight.new(christian, computer)
-    new_playfight.run
+    Cat.create_cat
+    Cat.save
