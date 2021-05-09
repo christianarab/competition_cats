@@ -9,8 +9,9 @@ Competition Cats!
    (l)  list players
    (c)  create cats
    
-   (1) play a game of against mice!
-   (2) play competition!
+   play games:
+   (1) play a game of mice against computer
+   (2) competition playfight
 
     
    (q) quit    (m) display menu
