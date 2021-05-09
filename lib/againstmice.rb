@@ -59,8 +59,8 @@ class Againstmice
         puts "enter player two's cat name"
         cat_two = gets.chomp
         against_mice = Againstmice.new(Cat.new(cat_one), Cat.new(cat_two))
-        self.spawn
-        self.compete
-        self.results
+        spawn
+        compete
+        results
     end
 end

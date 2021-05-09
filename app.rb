@@ -22,8 +22,7 @@ class App
             when '1'
                 Againstmice.run
             when 'l'
-                Player.load
-                Player.list
+                Player.all
             when 'n'
                 Player.create
             when 'm'
@@ -35,3 +34,11 @@ class App
 end
 
 App.run
+
+# Load menu
+    # Create players
+    # Select Games
+        # Select your cat
+        # Play against computer
+    # List players
+    # Quit

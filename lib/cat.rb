@@ -22,10 +22,10 @@ class Cat
         user_input = ''
         puts "Please name your cat: "
         cat_name = gets.chomp
-        meow_made = Cat.new(cat_name)
+        cat = Cat.new(cat_name)
         puts "meow meow... meow meow MEOWWWWW"
-        puts "meow welcome to the human world #{meow_made.name}"
-        @cats << meow_made.to_s
+        puts "meow welcome to the human world #{ cat.name}"
+        @cats << cat.to_s
     end
     
     def self.save

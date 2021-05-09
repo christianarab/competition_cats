@@ -27,7 +27,7 @@ class Player
         # select cat
     end
 
-    def self.list
+    def self.all
         loaded_players = self.load
         puts "These are the current players:"
         loaded_players.each_with_index do |player, index|
