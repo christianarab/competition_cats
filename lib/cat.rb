@@ -1,8 +1,8 @@
 require_relative('player.rb')
 
 class Cat
-    attr_reader :size, :agility, :strength, :confidence
-    attr_accessor :wins, :losses, :energy, :tally, :name, :cats, :competition_wins
+    attr_reader :size, :agility, :confidence
+    attr_accessor :wins, :losses, :energy, :tally, :name, :cats, :competition_wins, :strength
 
     def initialize(name)
         @name = name

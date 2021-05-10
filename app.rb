@@ -8,8 +8,10 @@ require_relative('./lib/menu.rb')
 require_relative('./lib/pawz.rb')
 
 class App
+
     def self.run
         puts "Running Competition Cats!"
+        default_user = Player.new("Default")
         while true do
             puts MENU
             user_input = gets.chomp
@@ -30,7 +32,7 @@ class App
                 cat2 = Cat.new("little baby")
                 Competition.run(cat1, cat2)
             when 'm'
-                Pawz.trade
+                Pawz.trade(default_user)
             else
                 puts "It broke! ouch"
             end
