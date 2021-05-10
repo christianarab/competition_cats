@@ -11,8 +11,9 @@ Competition Cats!
    (m)  pawz mart & bank
    
    play games:
-   (1) play a game of mice against computer
-   (2) competition playfight
+   
+      (1) play a game of mice against computer
+      (2) competition playfight
 
     
    (q) quit    (m) display menu

@@ -1,4 +1,5 @@
 require_relative('player.rb')
+require_relative('cat.rb')
 
 PAWMART = <<-menu
 
@@ -45,7 +46,7 @@ class Pawz
             when '1'
                 # tunashake
                 player.pawz -= 300
-                player.cat.strength += 500
+                player.cat.strength + 400
                 puts "Yum! That's a nice tunashake."
                 puts "Your pawz balance: #{player.pawz}"
                 puts "Your cat's strength is now: #{player.cat.strength}"

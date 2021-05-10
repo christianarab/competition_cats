@@ -61,6 +61,10 @@ class Cat
         @strength = base + bonus
     end
 
+    def strength_pawz
+        @strength = strength + 300
+    end
+
     def confidence
         # scale from 1 to 100
         base = 50
