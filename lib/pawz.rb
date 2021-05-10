@@ -12,6 +12,7 @@ menu
         attr_accessor :pawz 
 
     def initalize(player)
+        @player = player
         @pawz = 0
     end
 
@@ -20,7 +21,7 @@ menu
         puts "here is your total paz"
     end
 
-    def trade
+    def self.trade
         puts "welcome to pal-mart: save on pawz"
         puts "meow! what would you like to buy?"
         while true do

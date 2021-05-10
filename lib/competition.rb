@@ -1,5 +1,5 @@
 class Competition
-    attr_accessor :player_1, :player_2
+    attr_accessor :player_1, :player_2, :cat
 
     def initialize(player_1, player_2)
         @player_1, @player_2 = player_1, player_2
@@ -13,21 +13,27 @@ class Competition
     end 
 
     def self.arm_fight(player_1, player_2)
-        player_1_move = self.generate_move(player_1.cat)
-        player_2_move = self.generate_move(player_2.cat)
+        p1_wins = 0
+        p2_wins = 0
+        player_1_move = self.generate_move(player_1)
+        player_2_move = self.generate_move(player_2)
+        puts player_1_move
+        puts player_2_move
         puts "meow paw fight!!!"
         if player_1_move > player_2_move
-            @p1_wins += 01
-            @player_1.cat.wins += 1
-            @player_1.cat.strength + 50
-            @player_2.cat.losses += 1            
-            puts "#{@player_1.cat.name} wins!"
+            p1_wins += 1
+            player_1.wins += 1
+            player_1.strength + 50
+            player_2.losses += 1            
+            puts "#{player_1.name} wins!"
         elsif player_2_move < player_1_move
-            @p1_wins += 02
-            @player_2.cat.wins += 1
-            @player_2.cat.strength + 50
-            @player_1.cat.losses += 1
-            puts "#{@player_2.cat.name} wins!"
+            p2_wins += 1
+            player_2.wins += 1
+            player_2.strength + 50
+            player_1.losses += 1
+            puts "#{player_2.name} wins!"
+        else
+            puts "Wow it's broken!"
         end
     end
 
@@ -54,7 +60,7 @@ class Competition
     end
 
     def self.prize
-        if p1_wins > p2_wins
+        if @p1_wins > @p2_wins
             puts "Congrats player one, you win the competition!"
             @player_1.cat.competition_wins += 1
         elsif p2_wins < p1_wins
@@ -62,5 +68,13 @@ class Competition
             @player_2.cat.competition_wins += 1
         else p1_wins == p2_wins
             puts "It's a time"
+        end
     end
+
+    def self.run
+        arm_fight
+        count_mice
+        prize
+    end
+
 end

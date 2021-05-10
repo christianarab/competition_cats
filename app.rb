@@ -6,6 +6,7 @@ require_relative('./lib/playfight.rb')
 require_relative('./lib/againstmice.rb')
 require_relative('./lib/competition.rb')
 require_relative('./lib/menu.rb')
+require_relative('./lib/pawz.rb')
 
 class App
     def self.run
@@ -25,7 +26,13 @@ class App
                 Againstmice.run
             when 'l'
                 Player.all
+            when '2'
+                cat1 = Cat.new("kitty monster")
+                cat2 = Cat.new("little baby")
+                Competition.new(cat1, cat2)
+                Competition.arm_fight(cat1, cat2)
             when 'm'
+                Pawz.trade
             else
                 puts "It broke! ouch"
             end
@@ -33,7 +40,4 @@ class App
     end
 end
 
-player_1 = Player.new("Christian")
-player_2 = Player.new("Tony")
-
-Competition.count_mice
+App.run
