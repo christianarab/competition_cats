@@ -10,6 +10,7 @@ class Cat
         @energy = 100
         @wins = 0
         @losses = 0
+        @competition_wins = 0
         @confidence = confidence
         @agility = agility
         @strength = strength

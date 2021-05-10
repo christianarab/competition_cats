@@ -32,19 +32,8 @@ class App
         end 
     end
 end
-Player.find_by_email("Christian")
-App.run
 
-# Load menu
-    # Create players
-        # 
-    # Create cat
-    # Select Games
-        # Select your cat
-            # TODO _______________
-        # Play against computer
-            # Against Mice game
-            # TODO ________________
-    # List players
-        # Runs Player.all: reads player file, puts data
-    # Quit program
+player_1 = Player.new("Christian")
+player_2 = Player.new("Tony")
+
+Competition.count_mice

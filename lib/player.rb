@@ -4,6 +4,7 @@ class Player
     attr_accessor :name, :cat
     def initialize(name)
         @name = name
+        @cat = Cat.new("Kitty")
     end
 
     def self.create
