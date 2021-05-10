@@ -1,3 +1,5 @@
+require_relative('cat.rb')
+
 class Competition
     attr_accessor :player_1, :player_2, :cat
 
@@ -21,17 +23,19 @@ class Competition
         puts player_1_move
         puts player_2_move
         puts "meow paw fight!!!"
-        if player_1_move > player_2_move
+        if player_1_move.to_i > player_2_move.to_i
             # @player_1.wins += 1
             # @player_1.strength + 50
             # @player_2.losses += 1            
-            puts "#{cat1} wins!"
+            puts "#{cat1.name} wins!"
+            cat1.wins += 69
             # return p1_wins += 1
-        elsif player_2_move < player_1_move
+        elsif player_2_move.to_i < player_1_move.to_i
             # @player_2.wins += 1
             # @player_2.strength + 50
             # @player_1.losses += 1
-            puts "#{cat2} wins!"
+            puts "#{cat2.name} wins!"
+            cat1.wins += 69
             # return p2_wins += 1
         else
             puts "Wow it's broken!"
