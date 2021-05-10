@@ -17,14 +17,14 @@ class App
             case user_input
             when 'q'
                 break
+            when 'n'
+                Player.create
             when 'c'
                 Cat.create_cat
             when '1'
                 Againstmice.run
             when 'l'
                 Player.all
-            when 'n'
-                Player.create
             when 'm'
             else
                 puts "It broke! ouch"
@@ -32,13 +32,19 @@ class App
         end 
     end
 end
-
+Player.find_by_email("Christian")
 App.run
 
 # Load menu
     # Create players
+        # 
+    # Create cat
     # Select Games
         # Select your cat
+            # TODO _______________
         # Play against computer
+            # Against Mice game
+            # TODO ________________
     # List players
-    # Quit
+        # Runs Player.all: reads player file, puts data
+    # Quit program

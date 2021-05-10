@@ -21,27 +21,27 @@ class Player
         end
     end
 
-    def self.add_cat
-        puts "would you like to add a cat to your profile? meow!"
-        #  list cats
-        # select cat
-    end
-
     def self.all
-        loaded_players = self.load
-        puts "These are the current players:"
-        loaded_players.each_with_index do |player, index|
-            puts "\t#{index+1}) #{player.name}"
-        end
-    end
-
-    def self.load
         players = []
         File.open('./saves/players', 'r') do |file|
           file.each do |line|
             name = line
-            players << Player.new(name)
+            players << Player.new(name.chomp!)
           end
+        end
+        players
+    end
+
+    def self.find_by_email(name)
+        players = []
+        all.each do |user|
+            if  name == user
+                puts "Match! Found user by name.\n"
+                puts "Query: #{name}. Player name"
+                players << Player.new(user.name)
+            else
+                puts "No!"
+            end
         end
         players
     end
