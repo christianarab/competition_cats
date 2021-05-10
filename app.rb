@@ -29,8 +29,7 @@ class App
             when '2'
                 cat1 = Cat.new("kitty monster")
                 cat2 = Cat.new("little baby")
-                Competition.new(cat1, cat2)
-                Competition.arm_fight(cat1, cat2)
+                Competition.run(cat1, cat2)
             when 'm'
                 Pawz.trade
             else
