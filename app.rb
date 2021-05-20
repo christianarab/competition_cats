@@ -19,6 +19,20 @@ class App
     @@session['user'] = User.login(email, password)
   end
 
+  def self.create_user
+    puts "Email address: "
+    email = gets.chomp
+    puts "Password: "
+    password = gets.chomp
+    user = User.new(email, password)
+    user.save
+    if user.save
+      puts "User saved!"
+    else
+      puts "Something went wrong"
+    end
+  end
+
   def self.run
     puts "Running Competition Cats!"
     # default_user = Player.new("Default")
@@ -32,7 +46,7 @@ class App
       when 'l'
         App.login
       when 'c'
-        Cat.create_cat
+        App.create_user
       when '1'
         Againstmice.run
       when 'l'

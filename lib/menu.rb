@@ -5,9 +5,8 @@ Competition Cats!
 
 ﾐㅇ ༝ ㅇﾐ meow meow meow
 
-   (n)  create a player 
-   (l)  list players
-   (c)  create cats
+   (l)  login
+   (c)  create a new user
    (m)  pawz mart & bank
    
    play games:
