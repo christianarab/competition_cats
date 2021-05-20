@@ -32,10 +32,13 @@ class Player
             players << Player.new(name.chomp!)
           end
         end
+        players.each do |player|
+            puts player.name
+        end
         players
     end
 
-    def self.find_by_email(name)
+    def self.find_by_name(name)
         players = []
         all.each do |user|
             if  name == user

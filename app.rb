@@ -1,4 +1,5 @@
 require_relative('./tests/my_tests.rb')
+require_relative('./lib/user.rb')
 require_relative('./lib/cat.rb')
 require_relative('./lib/player.rb')
 require_relative('./lib/playfight.rb')
@@ -8,9 +9,19 @@ require_relative('./lib/menu.rb')
 require_relative('./lib/pawz.rb')
 
 class App
+  @@session = {}
+ 
+  def self.login
+    puts "Enter your email: "
+    email = gets.chomp
+    puts "Enter your password: "
+    password = gets.chomp
+    @@session['user'] = User.login(email, password)
+  end
+
   def self.run
     puts "Running Competition Cats!"
-    default_user = Player.new("Default")
+    # default_user = Player.new("Default")
     while true do
       puts MENU
       user_input = gets.chomp
@@ -18,8 +29,8 @@ class App
       case user_input
       when 'q'
         break
-      when 'n'
-        Player.create
+      when 'l'
+        App.login
       when 'c'
         Cat.create_cat
       when '1'
