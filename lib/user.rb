@@ -8,7 +8,7 @@ class User
   end
 
   def save
-    File.open('././saves/user', 'a') do |file|
+    File.open('././data/user', 'a') do |file|
       file.write("#{@email}, #{@encrypted_password}\n")
     end
   end
@@ -23,7 +23,7 @@ class User
   end
 
   def self.find_by(email)
-    File.open('././saves/user', 'r') do |file|
+    File.open('././data/user', 'r') do |file|
       file.each do |line|
         user_email, encrypted_password = line.split(', ')
         if user_email == email
