@@ -8,36 +8,35 @@ require_relative('./lib/menu.rb')
 require_relative('./lib/pawz.rb')
 
 class App
+  def self.run
+    puts "Running Competition Cats!"
+    default_user = Player.new("Default")
+    while true do
+      puts MENU
+      user_input = gets.chomp
 
-    def self.run
-        puts "Running Competition Cats!"
-        default_user = Player.new("Default")
-        while true do
-            puts MENU
-            user_input = gets.chomp
-
-            case user_input
-            when 'q'
-                break
-            when 'n'
-                Player.create
-            when 'c'
-                Cat.create_cat
-            when '1'
-                Againstmice.run
-            when 'l'
-                Player.all
-            when '2'
-                cat1 = Cat.new("kitty monster")
-                cat2 = Cat.new("little baby")
-                Competition.run(cat1, cat2)
-            when 'm'
-                Pawz.trade(default_user)
-            else
-                puts "It broke! ouch"
-            end
-        end 
-    end
+      case user_input
+      when 'q'
+        break
+      when 'n'
+        Player.create
+      when 'c'
+        Cat.create_cat
+      when '1'
+        Againstmice.run
+      when 'l'
+        Player.all
+      when '2'
+        cat1 = Cat.new("kitty monster")
+        cat2 = Cat.new("little baby")
+        Competition.run(cat1, cat2)
+      when 'm'
+        Pawz.trade(default_user)
+      else
+        puts "It broke! ouch"
+      end
+    end 
+  end
 end
 
 App.run
