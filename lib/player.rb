@@ -37,13 +37,13 @@ class Player
   def select_cat
     @cats = Cat.load
     puts "Please select a cat:"
-    puts "no.\tname\tsize\tconfidence\t"
+    puts "no.\t\tname\t\tsize\t\tconfidence\t\tagility\t\tstrength\n"
     @cats.each_with_index do |cat, idx|
-      puts "#{idx+1}. #{cat.name}, #{cat.size}, #{cat.confidence}, #{cat.agility}, #{cat.strength}"
+      puts "#{idx+1}.\t\t#{cat.name}\t\t#{cat.size}\t\t#{cat.confidence}\t\t\t#{cat.agility}\t\t#{cat.strength}"
     end
     puts "Which cat would you like to pick? Enter the number"
     user_input = gets.chomp.to_i
-    @cat = @cats[user_input-0]
+    @cat = @cats[user_input-1]
   end
 
   # Todo: loading method for player profile. This loading method will be called in app, when user logs in.
