@@ -5,19 +5,21 @@
 MENU = <<-menu
 
         Competition Cats
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------------------------------------
+   ﾐㅇ ༝ ㅇﾐ meow meow meow welcome to...
 
-   ﾐㅇ ༝ ㅇﾐ meow meow meow welcome
+               Competition Cats!!!!
 
    (l)  login
    (c)  create a new user
 
     
    (q) quit    (m) display menu
+------------------------------------------------------------
 menu
 
 GAMEMENU = <<-menu
-
+------------------------------------------------------------
    ﾐ~ ༝ ~ﾐ select a game:
 
    (1) practice: mice catching
@@ -25,4 +27,20 @@ GAMEMENU = <<-menu
    (3) competition: count mice
 
    (q) quit    (m) display menu
+------------------------------------------------------------
+menu
+
+PAWMART = <<-menu
+------------------------------------------------------------
+ﾐ$ ༝ $ﾐ PAWMART
+
+  Spend your pawz(pz) here!
+
+  (1)  300 pz  tunashake 
+  (2)  150 pz  catnip tea 
+  (3)  400 pz  beyondmice burger 
+  (4)  450 pz  +5 game tokens
+  
+  (q) quit    (m) display menu          ﾐㅇ ༝ ㅇﾐ meow~~~ 
+------------------------------------------------------------
 menu
