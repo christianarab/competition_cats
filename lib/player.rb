@@ -8,7 +8,7 @@ require_relative ('cat.rb')
 class Player
   attr_accessor :user, :cat, :pawz, :tokens, :wins, :losses, :competition_wins
   
-  def initialize(user, pawz, tokens, wins, losses, competition_wins)
+  def initialize(user, pawz=400, tokens=5, wins=0, losses=0, competition_wins=0)
     @user = user
     @pawz = pawz
     @tokens = tokens
