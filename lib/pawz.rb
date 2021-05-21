@@ -1,21 +1,6 @@
 require_relative('player.rb')
 require_relative('cat.rb')
-
-PAWMART = <<-menu
-
-------------------------------------------------------------
-ﾐㅇ ༝ ㅇﾐ PAWMART
-  Spend your pawz(pz) here!
-
-  (1)  300 pz tunashake (+50 strength for 3 competitions) 
-  (2)  150 pz catnip tea (+30 confidence for 1 day)
-  (3)  400 pz beyondmice burger (+100 strength for 1 day)
-  
-  (q) quit    (m) display menu          ﾐㅇ ༝ ㅇﾐ meow~~~ 
-------------------------------------------------------------
-
-menu
-
+require_relative('menu.rb')
 
 class Pawz
 

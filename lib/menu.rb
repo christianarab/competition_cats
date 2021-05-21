@@ -26,7 +26,7 @@ GAMEMENU = <<-menu
    (2) competition: paw fight
    (3) competition: count mice
 
-   (q) quit    (m) display menu
+   (q) quit    (m) display menu     (p) pawzmart! $$$
 ------------------------------------------------------------
 menu
 
@@ -41,6 +41,6 @@ PAWMART = <<-menu
   (3)  400 pz  beyondmice burger 
   (4)  450 pz  +5 game tokens
   
-  (q) quit    (m) display menu          ﾐㅇ ༝ ㅇﾐ meow~~~ 
+  (q) quit    (m) game menu          ﾐㅇ ༝ ㅇﾐ meow~~~ 
 ------------------------------------------------------------
 menu
