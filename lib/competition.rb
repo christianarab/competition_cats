@@ -1,20 +1,26 @@
-require_relative('cat.rb')
-
+require_relative ('cat.rb')
+# Welcome to competition cats, were our furry (sometimes not) friends compete with their nine lives!
+# Competition is a series of games that create challenges for players' cats.
+# The cat that wins the most rounds out of 3 wins the competition.
+# To enter a competition, the player must use 1 player points. By winning a competition the player will earn a player point.
 class Competition
 	attr_accessor :player_1, :player_2, :cat
 
+	# Todo: revise
 	def initialize(player_1, player_2)
 		@player_1, @player_2 = player_1, player_2
 		@p1_wins = 0
 		@p2_wins = 0
 	end
 
+	# Generates move points per cat, for game logic
 	def self.generate_move(cat)
 		modifier = [1, 250, 500, 750, 1000].sample
 		points = ((cat.strength * cat.confidence) + (modifier * 3))
 		points.to_i
 	end 
 
+	# Todo: revise arm fight
 	def self.arm_fight(cat1, cat2)
 		p1_wins = 0
 		p2_wins = 0
@@ -42,6 +48,7 @@ class Competition
 		end
 	end
 
+	# Count mice is a game where players, have to guess the number of mice in the room.
 	def self.count_mice(cat1, cat2)
 		puts "Meow, first one to find the number of mice in this room wins!"
 		mice = rand(25)
@@ -65,6 +72,7 @@ class Competition
 		end
 	end
 
+	# Todo: revise prize, and reward system
 	def self.prize(cat1, cat2)
 		if cat1.wins > cat2.wins
 			puts "Congrats player one, you win the competition!"
@@ -77,6 +85,7 @@ class Competition
 		end
 	end
 
+	# Run game
 	def self.run(cat1, cat2)
 		arm_fight(cat1, cat2)
 		count_mice(cat1, cat2)

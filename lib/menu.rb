@@ -1,3 +1,7 @@
+# menu.rb is the command line menu for Competition Cats.
+# Todo: (create) several different CLI menus, work on ui flow
+# Todo: (revise) login ui -> game menu ui (cat selection, pawz marts, game selection)
+# Todo: (new feature) each game should have a unique ui 
 MENU = <<-menu
 
 Competition Cats!

@@ -1,9 +1,15 @@
 require_relative('player.rb')
 
+# I hope you are a cat person... or atleast appeciate a cute one because this game is all about cats!
+# Cats act as your companions in Competition Cats. Each cat uniquely have both strength and weaknesses.
+# Each cat should have a name, size, confidence, agility, strength, and charm traits. These traits effect gameplay.
+# Cats are entered into competitions against mutliple human players and/or computer opponents.
+# Results of competitions are reflected through wins, looses, ties, and competition wins
 class Cat
 	attr_reader :size, :agility, :confidence
 	attr_accessor :wins, :losses, :energy, :tally, :name, :cats, :competition_wins, :strength
 
+	# Todo: clean up and finalize attributes of cat
 	def initialize(name)
 		@name = name
 		@size = ['small', 'medium', 'large'].sample
@@ -18,6 +24,7 @@ class Cat
 		@cats = []
 	end
 
+	# Todo: revise create cat. V1 Competition Cats to have cat templates to start by
 	def self.create_cat 
 		@cats = []
 		user_input = ''
@@ -25,16 +32,18 @@ class Cat
 		cat_name = gets.chomp
 		cat = Cat.new(cat_name)
 		puts "meow meow... meow meow MEOWWWWW"
-		puts "meow welcome to the human world #{ cat.name}"
+		puts "meow welcome to the human world #{cat.name}"
 		@cats << cat.to_s
 end
 
+	# Todo: revise save, creating association to player profile.
 	def self.save
-		File.open('.././saves/cats', 'a') do |file|
+		File.open('.././data/cats', 'a') do |file|
 			file.write("#{@cats}\n")
 		end
 	end
 
+	# Agility determined by size of cat
 	def agility
 		base = 50
 		case size
@@ -48,6 +57,7 @@ end
 		@agility = base + bonus
 	end
 
+	# Strength determined by size of cat
 	def strength
 		base = 50
 		case size
@@ -61,10 +71,12 @@ end
 		@strength = base + bonus
 	end
 
+	# Todo: revise and impliment pawz marts items. Most items will have time sensitive usage.
 	def strength_pawz
 		@strength = strength + 300
 	end
 
+	# Confidence is determined by previous wins, and losses 
 	def confidence
 		# scale from 1 to 100
 		base = 50

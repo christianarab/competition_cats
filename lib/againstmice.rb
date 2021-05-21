@@ -1,5 +1,7 @@
-require_relative('cat')
+require_relative ('cat')
 
+# Againstmice is a mini game for two cats. 300 mice are spawned with different agility. It is your cats job to catch as many as they can.
+# The cat that catches the most mice wins!
 class Againstmice
 	attr_accessor :tally, :cat1, :cat2, :mice
 
@@ -8,6 +10,7 @@ class Againstmice
 		@tally = 0
 	end
 
+	# The mice spawn with agility traits determined by a random algorithm. 
 	def self.spawn
 		@mice = []
 		count = 100
@@ -26,6 +29,7 @@ class Againstmice
 		@mice
 	end
 
+	# Compete is used for each cat
 	def self.compete(*tally)
 		@tally = 0
 		mice1 = spawn
@@ -41,6 +45,7 @@ class Againstmice
 		return @tally
 	end
 
+	# Display results
 	def self.results
 		puts cat_1_chance_to_win = compete(@cat1)
 		puts cat_2_chance_to_win = compete(@cat2)
@@ -52,6 +57,7 @@ class Againstmice
 		end
 	end
 
+	# Runs game
 	def self.run
 		puts "against mice!"
 		puts "enter player one's cat name"
