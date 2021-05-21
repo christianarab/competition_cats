@@ -28,7 +28,7 @@ class Cat
 
   def self.load 
     cats = []
-    File.open('.././data/cats', 'r') do |file|
+    File.open('././data/cats', 'r') do |file|
       file.each_line do |line|
         name, size, energy, confidence, agility, strength = line.split(", ")
         cats << Cat.new(name, size, energy, confidence, agility, strength.chomp)
@@ -74,7 +74,7 @@ class Cat
   def confidence
     # scale from 1 to 100
     base = 50
-    current_confidence = base + (@wins * 2) - (@losses * 2)
+    current_confidence = base + rand(10..30)
     if current_confidence > 100
       return 100
     elsif

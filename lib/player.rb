@@ -6,7 +6,7 @@ require_relative ('cat.rb')
 # Players will automatically save and load according to their game outcomes, point usage, etc.
 # Todo: add cat selection flow, ability to view cats at hand
 class Player
-  attr_accessor :user, :cat, :pawz, :playpoints
+  attr_accessor :user, :cat, :pawz, :playpoints, :wins, :looses, :competiton_wins
   
   def initialize(user)
     @user = user
@@ -32,6 +32,18 @@ class Player
     elsif user_input == 'n'
     player_array
     end
+  end
+
+  def select_cat
+    @cats = Cat.load
+    puts "Please select a cat:"
+    puts "no.\tname\tsize\tconfidence\t"
+    @cats.each_with_index do |cat, idx|
+      puts "#{idx+1}. #{cat.name}, #{cat.size}, #{cat.confidence}, #{cat.agility}, #{cat.strength}"
+    end
+    puts "Which cat would you like to pick? Enter the number"
+    user_input = gets.chomp.to_i
+    @cat = @cats[user_input-0]
   end
 
   # Todo: loading method for player profile. This loading method will be called in app, when user logs in.

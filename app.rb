@@ -14,9 +14,8 @@ class App
   def self.run
     puts "Running Competition Cats!"
     @session = {}
-
+    puts MENU
     while true do
-      puts MENU
       user_input = gets.chomp
 
       case user_input
@@ -29,20 +28,13 @@ class App
         puts "Enter your password: "
         password = gets.chomp
         @session['p1_login'] = User.login(email, password)
+        @session['p1_profile'] = Player.new(@session['p1_login'])
+        @session['p1_profile'].select_cat
+        puts "Your cat is...\n"
+        puts "#{@session['p1_profile'].cat}"
         # Todo: (feature) see line 34 comment in player.rb
-        puts "Is there a second player? y/n"
-        user_input = gets.chomp
-        case user_input
-        when 'y' 
-          puts "Enter your email: "
-          email = gets.chomp
-          puts "Enter your password: "
-          password = gets.chomp
-          @session['p1_login'] = User.login(email, password)
-          break
-        when 'n'
-          break
-        end
+        # TODO: ADD MULTIPLAYER!!!
+        puts GAMEMENU
       when 'c'
         # Creates a new user with email and password.
         puts "Create a new user!"
@@ -53,7 +45,7 @@ class App
         puts "Creating new user..."
         user = User.new(email, password)
         @session['p1_login'] = User.new(email, password)
-        @session['p1_profile']= Player.new(user)
+        @session['p1_profile'] = Player.new(user)
         user.save
         if user.save
           puts "User saved!"
@@ -62,13 +54,13 @@ class App
         end
         puts GAMEMENU
       when '1'
-        Againstmice.run
+        Againstmice.run(@session['p1_profile'])
       when 'l'
         Player.all
       when '2'
         Competition.run(cat1, cat2)
       when 'm'
-        Pawz.trade(default_user)
+        puts MENU
       else
         puts "It broke! ouch"
       end

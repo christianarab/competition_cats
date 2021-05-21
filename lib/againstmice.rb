@@ -3,10 +3,10 @@ require_relative ('cat')
 # Againstmice is a mini game for two cats. 300 mice are spawned with different agility. It is your cats job to catch as many as they can.
 # The cat that catches the most mice wins!
 class Againstmice
-  attr_accessor :tally, :cat1, :cat2, :mice
+  attr_accessor :tally, :mice, :computer
 
-  def initialize(cat1, cat2)
-    @cat1, @cat2 = cat1, cat2
+  def initialize(player)
+    @player = player
     @tally = 0
   end
 
@@ -47,24 +47,20 @@ class Againstmice
 
   # Display results
   def self.results
-    puts cat_1_chance_to_win = compete(@cat1)
-    puts cat_2_chance_to_win = compete(@cat2)
+    cat_1_chance_to_win = compete(@player)
+    cat_2_chance_to_win = compete(@computer)
 
     if cat_1_chance_to_win > cat_2_chance_to_win
-      puts "Cat 1 wins, Cat 2 looses"
+      puts "#{player.cat.name} wins, Computer looses!"
+      @player.wins +=1
     else
-      puts "Cat 2 wins, Cat 1 looses"
+      puts "#{player.cat.name} looses!"
+      @player.losses += 1
     end
   end
 
   # Runs game
-  def self.run
-    puts "against mice!"
-    puts "enter player one's cat name"
-    cat_one = gets.chomp
-    puts "enter player two's cat name"
-    cat_two = gets.chomp
-    against_mice = Againstmice.new(Cat.new(cat_one), Cat.new(cat_two))
+  def self.run(player)
     spawn
     compete
     results
