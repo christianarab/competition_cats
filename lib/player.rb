@@ -30,9 +30,14 @@ class Player
     @cat = @cats[user_input-1]
   end
 
-  # Todo: save load and load method
   def self.save(profile)
-    File.open('././data/profile', 'a') do |file|
+    File.open("././data/#{profile.user.email}", 'a') do |file|
+      file.write("#{profile.user.email}, #{profile.pawz}, #{profile.tokens}, #{profile.wins}, #{profile.losses}, #{profile.competition_wins}\n")
+    end
+  end
+
+  def self.load(email)
+    File.open("././data/#{email}", 'a') do |file|
       file.write("#{profile.user.email}, #{profile.pawz}, #{profile.tokens}, #{profile.wins}, #{profile.losses}, #{profile.competition_wins}\n")
     end
   end

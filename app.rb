@@ -32,6 +32,8 @@ class App
         @session['p1_profile'].select_cat
         puts "Your cat is...\n"
         puts "#{@session['p1_profile'].cat}"
+        puts "This is your current information:\n"
+        puts @session['p1_profile'].to_s
         # Todo: (feature) see line 34 comment in player.rb
         # TODO: ADD MULTIPLAYER!!!
         puts GAMEMENU
