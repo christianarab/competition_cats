@@ -22,7 +22,7 @@ GAMEMENU = <<-menu
 
    (1) practice: mice catching
    (2) competition: paw fight
-   (3) pawz mart & bank
+   (3) competition: count mice
 
    (q) quit    (m) display menu
 menu
