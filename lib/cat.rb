@@ -6,8 +6,8 @@ require_relative('player.rb')
 # Cats are entered into competitions against mutliple human players and/or computer opponents.
 # Results of competitions are reflected through wins, looses, ties, and competition wins
 class Cat
-  attr_reader :size, :agility, :confidence
-  attr_accessor :wins, :losses, :energy, :name, :cats, :competition_wins, :strength
+
+  attr_accessor :wins, :losses, :energy, :name, :strength, :size, :agility, :confidence
 
   # Todo: clean up and finalize attributes of cat
   def initialize(name, size, energy, confidence, agility, strength)

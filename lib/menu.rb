@@ -4,10 +4,10 @@
 # Todo: (new feature) each game should have a unique ui 
 MENU = <<-menu
 
-Competition Cats!
-~~~~~~~~~~~~~~~~~
+        Competition Cats
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-ﾐㅇ ༝ ㅇﾐ meow meow meow
+   ﾐㅇ ༝ ㅇﾐ meow meow meow welcome
 
    (l)  login
    (c)  create a new user
@@ -18,9 +18,10 @@ menu
 
 GAMEMENU = <<-menu
 
+   ﾐ~ ༝ ~ﾐ select a game:
 
-   (1) play a game of mice against computer
-   (2) competition playfight
+   (1) practice: mice catching
+   (2) competition: paw fight
    (3) pawz mart & bank
 
    (q) quit    (m) display menu

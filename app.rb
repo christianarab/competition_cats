@@ -58,7 +58,17 @@ class App
       when 'l'
         Player.all
       when '2'
-        Competition.run(cat1, cat2)
+        puts "Paw fight!!!"
+        @session['p1_profile'].tokens -= 1
+        if Competition.paw_fight(@session['p1_profile'].cat) == "win"
+        puts "Congrats you have won!"
+        @session['p1_profile'].wins += 1
+        Player.save(@session['p1_profile'])
+        else
+        puts "You lost! Try again"
+        @session['p1_profile'].losses += 1
+        Player.save(@session['p1_profile'])
+        end
       when 'm'
         puts MENU
       else
