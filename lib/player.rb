@@ -6,11 +6,11 @@ require_relative ('cat.rb')
 # Players will automatically save and load according to their game outcomes, point usage, etc.
 # Todo: add cat selection flow, ability to view cats at hand
 class Player
-	attr_accessor :name, :cat, :pawz, :playpoints
+	attr_accessor :user, :cat, :pawz, :playpoints
 	
-	def initialize(name)
-		@name = name
-		@cat = Cat.new("Kitty")
+	def initialize(user)
+		@user = user
+		@cat = nil
 		@pawz = 400
 		@playpoints = 5
 	end
@@ -31,7 +31,7 @@ class Player
 		end
 	end
 
-	# Todo: loading method for player profile 
+	# Todo: loading method for player profile. This loading method will be called in app, when user logs in.
 	def self.all
 		players = []
 		File.open('././data/players', 'r') do |file|

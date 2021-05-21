@@ -9,33 +9,12 @@ require_relative('./lib/menu.rb')
 require_relative('./lib/pawz.rb')
 
 class App
-  @@session = {}
- 
-  def self.login
-    puts "Enter your email: "
-    email = gets.chomp
-    puts "Enter your password: "
-    password = gets.chomp
-    @@session['user'] = User.login(email, password)
-  end
-
-  def self.create_user
-    puts "Email address: "
-    email = gets.chomp
-    puts "Password: "
-    password = gets.chomp
-    user = User.new(email, password)
-    user.save
-    if user.save
-      puts "User saved!"
-    else
-      puts "Something went wrong"
-    end
-  end
+  attr_reader :current_user, :session
 
   def self.run
     puts "Running Competition Cats!"
-    # default_user = Player.new("Default")
+    @session = {}
+
     while true do
       puts MENU
       user_input = gets.chomp
@@ -44,9 +23,43 @@ class App
       when 'q'
         break
       when 'l'
-        App.login
+        # Todo: (revise) login, (feature) ability to have two users to log in.
+        puts "Enter your email: "
+        email = gets.chomp
+        puts "Enter your password: "
+        password = gets.chomp
+        @session['p1_login'] = User.login(email, password)
+        # Todo: (feature) see line 34 comment in player.rb
+        puts "Is there a second player? y/n"
+        user_input = gets.chomp
+        case user_input
+        when 'y' 
+          puts "Enter your email: "
+          email = gets.chomp
+          puts "Enter your password: "
+          password = gets.chomp
+          @session['p1_login'] = User.login(email, password)
+          break
+        when 'n'
+          break
+        end
       when 'c'
-        App.create_user
+        # Creates a new user with email and password.
+        puts "Create a new user!"
+        puts "Email address: "
+        email = gets.chomp
+        puts "Password: "
+        password = gets.chomp
+        puts "Creating new user..."
+        user = User.new(email, password)
+        @session['p1_login'] = User.new(email, password)
+        @session['p1_profile']= Player.new(user)
+        user.save
+        if user.save
+          puts "User saved!"
+        else
+          puts "Something went wrong"
+        end
       when '1'
         Againstmice.run
       when 'l'
