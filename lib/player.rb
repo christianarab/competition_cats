@@ -8,14 +8,14 @@ require_relative ('cat.rb')
 class Player
   attr_accessor :user, :cat, :pawz, :tokens, :wins, :losses, :competition_wins
   
-  def initialize(user)
+  def initialize(user, pawz, tokens, wins, losses, competition_wins)
     @user = user
+    @pawz = pawz
+    @tokens = tokens
+    @wins = wins
+    @losses = losses
+    @competition_wins = competition_wins
     @cat = nil
-    @pawz = 400
-    @tokens = 5
-    @wins = 0
-    @losses = 0
-    @competition_wins = 0
   end
 
   def select_cat
@@ -31,15 +31,15 @@ class Player
   end
 
   def self.save(profile)
-    File.open("././data/#{profile.user.email}", 'a') do |file|
+    File.open("././data/#{profile.user.email}", 'w') do |file|
       file.write("#{profile.user.email}, #{profile.pawz}, #{profile.tokens}, #{profile.wins}, #{profile.losses}, #{profile.competition_wins}\n")
     end
   end
 
-  def self.load(email)
-    File.open("././data/#{email}", 'a') do |file|
-      file.write("#{profile.user.email}, #{profile.pawz}, #{profile.tokens}, #{profile.wins}, #{profile.losses}, #{profile.competition_wins}\n")
-    end
+  def self.login(user, email)
+    f = File.open("././data/#{email}")
+    email, pawz, tokens, wins, losses, competition_wins = f.readlines[0].split(",")
+    profile = Player.new(user, pawz, tokens, wins, losses, competition_wins)
   end
 
   # Todo : Add to_s for good measure
@@ -47,4 +47,3 @@ class Player
     "user.email: #{@user.email}, paw points: #{@pawz}, tokens: #{@tokens}, wins: #{@wins}, losses: #{@losses}, competition wins: #{@competition_wins}"
   end
 end
-

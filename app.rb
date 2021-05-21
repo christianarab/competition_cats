@@ -28,7 +28,7 @@ class App
         puts "Enter your password: "
         password = gets.chomp
         @session['p1_login'] = User.login(email, password)
-        @session['p1_profile'] = Player.new(@session['p1_login'])
+        @session['p1_profile'] = Player.login(@session['p1_login'], email)
         @session['p1_profile'].select_cat
         puts "Your cat is...\n"
         puts "#{@session['p1_profile'].cat}"
