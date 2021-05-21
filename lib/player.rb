@@ -37,28 +37,9 @@ class Player
     end
   end
 
-  def find_by_user(user)
-  end
-
-  def all
-  end
-
-  # To revise: find_by_name for profile
-  def self.find_by_name(name)
-    all
-    all.each do |user|
-      if  name == user
-        puts "Match! Found user by name.\n"
-        puts "Query: #{name}. Player name"
-        players << Player.new(user.name)
-      else
-        puts "No!"
-      end
-    end
-    players
-  end
-
   # Todo : Add to_s for good measure
   def to_s
+    "user.email: #{user.email}, paw points: #{@pawz}, tokens: #{@tokens}, wins: #{@wins}, losses: #{@losses}, competition wins: #{@competition_wins}"
   end
 end
+
