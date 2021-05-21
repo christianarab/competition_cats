@@ -1,5 +1,8 @@
 require_relative ('./encryption.rb')
 
+# User acts as user login for games. Each time the app is run, it will prompt to create new profile or log in.
+# User takes in e-mail, and password. Password is encryped using encryption module and verified for future logins.
+# User creation will create a player profile (player.rb) association. 
 class User
   attr_accessor :email, :encrypted_password
 
