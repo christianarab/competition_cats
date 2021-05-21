@@ -11,13 +11,46 @@ require_relative('./lib/pawz.rb')
 class App
   attr_reader :session
 
+  def self.against_mice_ui
+    puts "Paw fight!!!"
+    @session['profile'].tokens -= 1
+    if Againstmice.run(@session['profile'].cat) == "win"
+      @session['profile'].wins += 1
+      @session['profile'].tokens += 3
+      puts "#{@session['profile'].cat.name} wins!\n"
+      puts "#{@session['profile'].cat.name} total wins: #{@session['profile'].wins}\n"
+      puts "#{@session['profile'].user.email} recieves 3 more tokens. Game token total: #{@session['profile'].tokens}\n"
+      Player.save(@session['profile'])
+    else
+      puts "You lost! Try again"
+      @session['profile'].losses += 1
+      Player.save(@session['profile'])
+    end
+  end
+
+  def self.paw_fight_ui
+    puts "Paw fight!!!"
+    @session['profile'].tokens -= 1
+    if Competition.paw_fight(@session['profile'].cat) == "win"
+      @session['profile'].wins += 1
+      @session['profile'].tokens += 3
+      puts "#{@session['profile'].cat.name} wins!\n"
+      puts "#{@session['profile'].cat.name} total wins: #{@session['profile'].wins}\n"
+      puts "#{@session['profile'].user.email} recieves 3 more tokens. Game token total: #{@session['profile'].tokens}\n"
+      Player.save(@session['profile'])
+    else
+      puts "You lost! Try again"
+      @session['profile'].losses += 1
+      Player.save(@session['profile'])
+    end
+  end
+
   def self.run
     puts "Running Competition Cats!"
     @session = {}
     puts MENU
     while true do
       user_input = gets.chomp
-
       case user_input
       when 'q'
         break
@@ -34,53 +67,42 @@ class App
         puts "#{@session['profile'].cat}"
         puts "This is your current information:\n"
         puts @session['profile'].to_s
-        # Todo: (feature) see line 34 comment in player.rb
         # TODO: ADD MULTIPLAYER!!!
         puts GAMEMENU
       when 'c'
-        # Creates a new user with email and password.
-          if @session['login'].instance_of?(User) == true
-            puts "#{@session['login'].email} is logged in. Cannot create new account."
+      # Creates a new user with email and password.
+        if @session['login'].instance_of?(User) == true
+          puts "#{@session['login'].email} is logged in. Cannot create new account."
+        else
+        puts "Create a new user!"
+        puts "Email address: "
+        email = gets.chomp
+        puts "Password: "
+        password = gets.chomp
+        puts "Creating new user..."
+        user = User.new(email, password)
+        @session['login'] = User.new(email, password)
+        @session['profile'] = Player.new(user)
+        Player.save(@session['profile'])
+        @session['profile'].select_cat
+        puts "Your cat is...\n"
+        puts "#{@session['profile'].cat}"
+        puts "This is your current information:\n"
+        puts @session['profile'].to_s
+        user.save
+          if user.save
+            puts "User saved!"
           else
-          puts "Create a new user!"
-          puts "Email address: "
-          email = gets.chomp
-          puts "Password: "
-          password = gets.chomp
-          puts "Creating new user..."
-          user = User.new(email, password)
-          @session['login'] = User.new(email, password)
-          @session['profile'] = Player.new(user)
-          Player.save(@session['profile'])
-          @session['profile'].select_cat
-          puts "Your cat is...\n"
-          puts "#{@session['profile'].cat}"
-          puts "This is your current information:\n"
-          puts @session['profile'].to_s
-          user.save
-            if user.save
-              puts "User saved!"
-            else
-              puts "Something went wrong"
-            end
+            puts "Something went wrong"
           end
+        end
         puts GAMEMENU
       when '1'
-        Againstmice.run(@session['profile'])
-      when 'l'
-        Player.all
+        App.against_mice_ui
+        puts GAMEMENU
       when '2'
-        puts "Paw fight!!!"
-        @session['profile'].tokens -= 1
-        if Competition.paw_fight(@session['profile'].cat) == "win"
-        puts "Congrats you have won!"
-        @session['profile'].wins += 1
-        Player.save(@session['profile'])
-        else
-        puts "You lost! Try again"
-        @session['profile'].losses += 1
-        Player.save(@session['profile'])
-        end
+        App.paw_fight_ui
+        puts GAMEMENU
       when 'm'
         puts MENU
       else

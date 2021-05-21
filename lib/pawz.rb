@@ -18,13 +18,8 @@ menu
 
 
 class Pawz
-  
-  attr_accessor :pawz
 
-  def initalize(player)
-    @player = player
-    @pawz = 500
-  end
+  attr_accessor :pawz
 
   def pawz_bank
     puts "welcome to the royal bank of pawz"

@@ -7,12 +7,6 @@ class Competition
   attr_accessor :player, :computer
   @@computer = Cat.new("Computer", 'medium', 100, 50, 50, 50)
 
-  # Todo: revise
-  def initialize
-    @p1_wins = 0
-    @p2_wins = 0
-  end
-
   # Todo: revise paw fight
   def self.paw_fight(cat)
     puts "This is a paw fight. Strongest paw grip wins!"

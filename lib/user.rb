@@ -18,7 +18,9 @@ class User
 
   def self.login(email, password)
     user = User.find_by(email)
-    if user.encrypted_password == Encryption.encrypt(password)
+    if user == nil 
+      puts "There is no user try again."
+    elsif user.encrypted_password == Encryption.encrypt(password)
       user
     else
       raise StandardError.new("This password is not correct.")
@@ -27,10 +29,12 @@ class User
 
   def self.find_by(email)
     File.open('././data/user', 'r') do |file|
-      file.each do |line|
+      file.map do |line|
         user_email, encrypted_password = line.split(', ')
         if user_email == email
           return User.new(user_email, encrypted_password.chomp)
+        else
+          puts "No user found"
         end
       end
     end

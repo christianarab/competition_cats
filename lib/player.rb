@@ -4,7 +4,6 @@ require_relative ('cat.rb')
 # Players will have currency (pawz) to purchase upgrades for their cats to be used in games. They will start with 400pawz.
 # Players tokens will determine how many games the User can enter. By default, players start with 5 - equal to 5 games.
 # Players will automatically save and load according to their game outcomes, point usage, etc.
-# Todo: add cat selection flow, ability to view cats at hand
 class Player
   attr_accessor :user, :cat, :pawz, :tokens, :wins, :losses, :competition_wins
   
@@ -25,7 +24,7 @@ class Player
     @cats.each_with_index do |cat, idx|
       puts "#{idx+1}.\t\t#{cat.name}\t\t#{cat.size}\t\t#{cat.confidence}\t\t\t#{cat.agility}\t\t#{cat.strength}"
     end
-    puts "Which cat would you like to pick? Enter the number"
+    puts "Which cat would you like to pick? Enter the number:"
     user_input = gets.chomp.to_i
     @cat = @cats[user_input-1]
   end
@@ -39,10 +38,9 @@ class Player
   def self.login(user, email)
     f = File.open("././data/#{email}")
     email, pawz, tokens, wins, losses, competition_wins = f.readlines[0].split(",")
-    profile = Player.new(user, pawz, tokens, wins, losses, competition_wins)
+    profile = Player.new(user, pawz.to_i, tokens.to_i, wins.to_i, losses.to_i, competition_wins.to_i)
   end
 
-  # Todo : Add to_s for good measure
   def to_s
     "user.email: #{@user.email}, paw points: #{@pawz}, tokens: #{@tokens}, wins: #{@wins}, losses: #{@losses}, competition wins: #{@competition_wins}"
   end

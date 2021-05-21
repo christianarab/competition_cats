@@ -42,27 +42,27 @@ class Againstmice
         puts "Mouse ran away!"
       end
     end
-    return @tally
+    @tally
   end
 
   # Display results
-  def self.results
-    cat_1_chance_to_win = compete(@player)
+  def self.results(cat)
+    cat_1_chance_to_win = compete(cat)
     cat_2_chance_to_win = compete(@computer)
 
     if cat_1_chance_to_win > cat_2_chance_to_win
-      puts "#{player.cat.name} wins, Computer looses!"
-      @player.wins +=1
+      puts "#{cat.name} wins, Computer looses!"
+      "win"
     else
-      puts "#{player.cat.name} looses!"
-      @player.losses += 1
+      puts "#{cat.name} looses!"
+      "lose"
     end
   end
 
   # Runs game
-  def self.run(player)
+  def self.run(cat)
     spawn
     compete
-    results
+    results(cat)
   end
 end
