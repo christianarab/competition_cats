@@ -65,8 +65,6 @@ class App
       when 'l'
         Player.all
       when '2'
-        cat1 = Cat.new("kitty monster")
-        cat2 = Cat.new("little baby")
         Competition.run(cat1, cat2)
       when 'm'
         Pawz.trade(default_user)

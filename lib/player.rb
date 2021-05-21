@@ -46,9 +46,9 @@ class Player
 		players
 	end
 
-	# To revise: find_by_name for player profile
+	# To revise: find_by_name for profile
 	def self.find_by_name(name)
-		players = []
+		all
 		all.each do |user|
 			if  name == user
 				puts "Match! Found user by name.\n"

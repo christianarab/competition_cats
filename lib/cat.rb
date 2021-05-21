@@ -30,6 +30,17 @@ class Cat
 		end
 	end
 
+	def self.load 
+		loaded = []
+		File.open('.././data/cats', 'r') do |file|
+			file.each_line do |line|
+				name, size, energy, confidence, agility, strength = line.split(", ")
+				loaded << Cat.new(name)
+			end
+		end
+		loaded
+	end
+
 	# Agility determined by size of cat
 	def agility
 		base = 50
@@ -82,3 +93,5 @@ class Cat
 		"name: #{@name}, size: #{@size}, energy: #{@energy}, agility: #{@agility}, strength: #{@strength}, confidence: #{@confidence}, wins: #{@wins}, losses: #{@losses}"
 	end
 end
+
+puts Cat.load.inspect
