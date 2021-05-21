@@ -45,6 +45,23 @@ class App
     end
   end
 
+  def self.count_mice_ui
+    puts "Paw fight!!!"
+    @session['profile'].tokens -= 1
+    if Competition.count_mice == "win"
+      @session['profile'].wins += 1
+      @session['profile'].tokens += 3
+      puts "#{@session['profile'].cat.name} wins!\n"
+      puts "#{@session['profile'].cat.name} total wins: #{@session['profile'].wins}\n"
+      puts "#{@session['profile'].user.email} recieves 3 more tokens. Game token total: #{@session['profile'].tokens}\n"
+      Player.save(@session['profile'])
+    else
+      puts "You lost! Try again"
+      @session['profile'].losses += 1
+      Player.save(@session['profile'])
+    end
+  end
+
   def self.run
     puts "Running Competition Cats!"
     @session = {}
@@ -102,6 +119,9 @@ class App
         puts GAMEMENU
       when '2'
         App.paw_fight_ui
+        puts GAMEMENU
+      when '3'
+        App.count_mice_ui
         puts GAMEMENU
       when 'm'
         puts MENU

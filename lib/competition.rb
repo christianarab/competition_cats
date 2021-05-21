@@ -23,26 +23,28 @@ class Competition
   end
 
   # Count mice is a game where players, have to guess the number of mice in the room.
-  def self.count_mice(cat1, cat2)
-    puts "Meow, first one to find the number of mice in this room wins!"
+  def self.count_mice
+    puts "Meow, first one to find the number of mice in this room wins! You have 9 tries."
     mice = rand(25)
 
-    counter = 10
+    counter = 9
     while counter > 0
     print "Type in your guess: "
     guess = gets.to_i
       if guess == mice
         puts "You found the mice!"
+        return "win"
       counter = 0
       elsif guess < mice
         puts "Your guess is smaller the mice"
+        counter -= 1
       elsif guess > mice
         puts "Your guess is bigger the mice"
+        counter -= 1
       elsif counter = 0
         puts "Ran out of tries"
-        puts "Next players turn!"
+        "lose"
       end
-      counter -= 1
     end
   end
 
