@@ -7,20 +7,16 @@ require_relative('player.rb')
 # Results of competitions are reflected through wins, looses, ties, and competition wins
 class Cat
   attr_reader :size, :agility, :confidence
-  attr_accessor :wins, :losses, :energy, :tally, :name, :cats, :competition_wins, :strength
+  attr_accessor :wins, :losses, :energy, :name, :cats, :competition_wins, :strength
 
   # Todo: clean up and finalize attributes of cat
-  def initialize(name)
+  def initialize(name, size, energy, confidence, agility, strength)
     @name = name
     @size = ['small', 'medium', 'large'].sample
     @energy = 100
-    @wins = 0
-    @losses = 0
-    @competition_wins = 0
     @confidence = confidence
     @agility = agility
     @strength = strength
-    @tally = 0 
   end
 
   # Todo: revise save, creating association to player profile.
@@ -31,14 +27,14 @@ class Cat
   end
 
   def self.load 
-    loaded = []
-    File.open('././data/cats', 'r') do |file|
+    cats = []
+    File.open('.././data/cats', 'r') do |file|
       file.each_line do |line|
         name, size, energy, confidence, agility, strength = line.split(", ")
-        loaded << Cat.new(name)
+        cats << Cat.new(name, size, energy, confidence, agility, strength.chomp)
       end
     end
-    loaded
+    cats
   end
 
   # Agility determined by size of cat
@@ -46,11 +42,11 @@ class Cat
     base = 50
     case size
     when 'small'
-        bonus = 50
+      bonus = 50
     when 'medium'
-        bonus = 25
+      bonus = 25
     when 'large'
-        bonus = 0
+      bonus = 0
     end
     @agility = base + bonus
   end
@@ -60,11 +56,11 @@ class Cat
     base = 50
     case size
     when 'large'
-        bonus = 50
+      bonus = 50
     when 'medium'
-        bonus = 25
+      bonus = 25
     when 'small'
-        bonus = 0
+      bonus = 0
     end
     @strength = base + bonus
   end
@@ -93,5 +89,3 @@ class Cat
     "name: #{@name}, size: #{@size}, energy: #{@energy}, agility: #{@agility}, strength: #{@strength}, confidence: #{@confidence}, wins: #{@wins}, losses: #{@losses}"
   end
 end
-
-puts Cat.load.inspect

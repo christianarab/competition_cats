@@ -13,6 +13,9 @@ class Player
     @cat = nil
     @pawz = 400
     @playpoints = 5
+    @wins = 0
+    @losses = 0
+    @competition_wins = 0
   end
 
   # Todo: Player.create method... player profile in upcoming version is automatically made with user login creation
