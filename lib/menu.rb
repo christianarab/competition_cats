@@ -11,13 +11,17 @@ Competition Cats!
 
    (l)  login
    (c)  create a new user
-   (m)  pawz mart & bank
-   
-   play games:
-   
-      (1) play a game of mice against computer
-      (2) competition playfight
 
     
+   (q) quit    (m) display menu
+menu
+
+GAMEMENU = <<-menu
+
+
+   (1) play a game of mice against computer
+   (2) competition playfight
+   (3) pawz mart & bank
+
    (q) quit    (m) display menu
 menu

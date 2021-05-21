@@ -60,13 +60,12 @@ class App
         else
           puts "Something went wrong"
         end
+        puts GAMEMENU
       when '1'
         Againstmice.run
       when 'l'
         Player.all
       when '2'
-        cat1 = Cat.new("kitty monster")
-        cat2 = Cat.new("little baby")
         Competition.run(cat1, cat2)
       when 'm'
         Pawz.trade(default_user)
