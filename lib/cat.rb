@@ -20,26 +20,13 @@ class Cat
 		@confidence = confidence
 		@agility = agility
 		@strength = strength
-		@tally = 0
-		@cats = []
+		@tally = 0 
 	end
 
-	# Todo: revise create cat. V1 Competition Cats to have cat templates to start by
-	def self.create_cat 
-		@cats = []
-		user_input = ''
-		puts "Please name your cat: "
-		cat_name = gets.chomp
-		cat = Cat.new(cat_name)
-		puts "meow meow... meow meow MEOWWWWW"
-		puts "meow welcome to the human world #{cat.name}"
-		@cats << cat.to_s
-end
-
 	# Todo: revise save, creating association to player profile.
-	def self.save
+	def save
 		File.open('.././data/cats', 'a') do |file|
-			file.write("#{@cats}\n")
+			file.write("#{@name}, #{@size}, #{energy}, #{confidence}, #{agility}, #{strength}\n")
 		end
 	end
 
@@ -94,5 +81,4 @@ end
 	def to_s
 		"name: #{@name}, size: #{@size}, energy: #{@energy}, agility: #{@agility}, strength: #{@strength}, confidence: #{@confidence}, wins: #{@wins}, losses: #{@losses}"
 	end
-
 end
