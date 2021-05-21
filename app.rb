@@ -60,6 +60,7 @@ class App
         else
           puts "Something went wrong"
         end
+        puts GAMEMENU
       when '1'
         Againstmice.run
       when 'l'
