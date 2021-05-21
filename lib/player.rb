@@ -1,14 +1,21 @@
-require_relative('cat.rb')
+require_relative ('cat.rb')
 
+# Player belongs to user. Each player will have the feature to have, pick, and select cats for competition.
+# Players will have currency (pawz) to purchase upgrades for their cats to be used in games. They will start with 400pawz.
+# Players play points will determine how many games the User can enter. By default, players start with 5 - equal to 5 games.
+# Players will automatically save and load according to their game outcomes, point usage, etc.
+# Todo: add cat selection flow, ability to view cats at hand
 class Player
-	attr_accessor :name, :cat, :pawz
+	attr_accessor :name, :cat, :pawz, :playpoints
 	
 	def initialize(name)
 		@name = name
 		@cat = Cat.new("Kitty")
 		@pawz = 400
+		@playpoints = 5
 	end
 
+	# Todo: Player.create method... player profile in upcoming version is automatically made with user login creation
 	def self.create
 		player_array = []
 		puts "create a player!\n"
@@ -24,9 +31,10 @@ class Player
 		end
 	end
 
+	# Todo: loading method for player profile 
 	def self.all
 		players = []
-		File.open('./saves/players', 'r') do |file|
+		File.open('././data/players', 'r') do |file|
 		  file.each do |line|
 			name = line
 			players << Player.new(name.chomp!)
@@ -38,6 +46,7 @@ class Player
 		players
 	end
 
+	# To revise: find_by_name for player profile
 	def self.find_by_name(name)
 		players = []
 		all.each do |user|
