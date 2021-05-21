@@ -39,7 +39,7 @@ class Player
 
   # Todo : Add to_s for good measure
   def to_s
-    "user.email: #{user.email}, paw points: #{@pawz}, tokens: #{@tokens}, wins: #{@wins}, losses: #{@losses}, competition wins: #{@competition_wins}"
+    "user.email: #{@user.email}, paw points: #{@pawz}, tokens: #{@tokens}, wins: #{@wins}, losses: #{@losses}, competition wins: #{@competition_wins}"
   end
 end
 
