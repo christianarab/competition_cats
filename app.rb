@@ -19,7 +19,6 @@ class App
       when 'q'
         break
       when 'l'
-        # Todo: (revise) login, (feature) ability to have two users to log in.
         App.login_ui
         break
       when 'c'
@@ -54,7 +53,7 @@ class App
     password = gets.chomp
     @session['login'] = User.login(email, password)
     @session['profile'] = Player.login(@session['login'], email)
-    @session['profile'].select_cat
+    @session['profile'].select_cat(email)
     puts "Player 1's cat is...\n"
     puts "#{@session['profile'].cat}"
     puts "Player 1 Stats:\n"
@@ -72,7 +71,7 @@ class App
         password = gets.chomp
         @session['login2'] = User.login(email, password)
         @session['profile2'] = Player.login(@session['login2'], email)
-        @session['profile2'].select_cat
+        @session['profile2'].select_cat(email)
         puts "Player 2's cat is...\n"
         puts "#{@session['profile2'].cat}"
         puts "Player 2 Stats:\n"
@@ -154,7 +153,8 @@ class App
         when 'm'
           puts MENU
         when 'p'
-          puts PAWMARTMENU
+          Pawz.trade(@session['profile'])
+          Player.save(@session['profile'])
         end
       end
     else

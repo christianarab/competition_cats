@@ -36,11 +36,12 @@ PAWMARTMENU = <<-menu
 
   Spend your pawz(pz) here!
 
-  (1)  300 pz  tunashake 
-  (2)  150 pz  catnip tea 
-  (3)  400 pz  beyondmice burger 
-  (4)  450 pz  +5 game tokens
-  
+  (1)  300 pz  tunashake                  +10 strength
+  (2)  150 pz  catnip tea                 +15 confidence
+  (3)  400 pz  beyondmice burger          +15 strength
+  (4)  450 pz  +5 game tokens                
+  (5)  500 pz  rename cat!  
+
   (q) quit    (m) game menu          ﾐㅇ ༝ ㅇﾐ meow~~~ 
 ------------------------------------------------------------
 menu

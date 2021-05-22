@@ -2,7 +2,7 @@ require_relative('player.rb')
 
 # I hope you are a cat person... or atleast appeciate a cute one because this game is all about cats!
 # Cats act as your companions in Competition Cats. Each cat uniquely have both strength and weaknesses.
-# Each cat should have a name, size, confidence, agility, strength, and charm traits. These traits effect gameplay.
+# Each cat should have a name, size, confidence, agility, and strength. These traits effect gameplay.
 # Cats are entered into competitions against mutliple human players and/or computer opponents.
 # Results of competitions are reflected through wins, looses, ties, and competition wins
 class Cat
@@ -42,9 +42,9 @@ class Cat
     base = 50
     case size
     when 'small'
-      bonus = 50
-    when 'medium'
       bonus = 25
+    when 'medium'
+      bonus = 10
     when 'large'
       bonus = 0
     end
@@ -56,25 +56,20 @@ class Cat
     base = 50
     case size
     when 'large'
-      bonus = 50
-    when 'medium'
       bonus = 25
+    when 'medium'
+      bonus = 10
     when 'small'
       bonus = 0
     end
     @strength = base + bonus
   end
 
-  # Todo: revise and impliment pawz marts items. Most items will have time sensitive usage.
-  def strength_pawz
-    @strength = strength + 300
-  end
-
-  # Confidence is determined by previous wins, and losses 
+  # Confidence
   def confidence
     # scale from 1 to 100
     base = 50
-    current_confidence = base + rand(10..30)
+    current_confidence = base
     if current_confidence > 100
       return 100
     elsif

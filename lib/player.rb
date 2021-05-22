@@ -17,22 +17,36 @@ class Player
     @cat = nil
   end
 
-  def select_cat
+  def greeting
+    
+  end
+
+  def select_cat(email)
     @cats = Cat.load
-    puts "Please select a cat:"
-    puts "no.\t\tname\t\tsize\t\tconfidence\t\tagility\t\tstrength\n"
-    @cats.each_with_index do |cat, idx|
-      puts "#{idx+1}.\t\t#{cat.name}\t\t#{cat.size}\t\t#{cat.confidence}\t\t\t#{cat.agility}\t\t#{cat.strength}"
+
+    if File.file?("././data/#{email}_cat")
+      f = File.open("././data/#{email}_cat", 'r') 
+      name, size, energy, confidence, agility, strength = f.readlines[0].split(", ")
+      @cat = Cat.new(name, size.to_i, energy.to_i, confidence.to_i, agility.to_i, strength.to_i)
+    else
+      puts "No cat found!"
+      puts "Please select a cat:"
+      puts "no.\t\tname\t\tsize\t\tconfidence\t\tagility\t\tstrength\n"
+      @cats.each_with_index do |cat, idx|
+        puts "#{idx+1}.\t\t#{cat.name}\t\t#{cat.size}\t\t#{cat.confidence}\t\t\t#{cat.agility}\t\t#{cat.strength}"
+      end
+      user_input = gets.chomp.to_i
+      @cat = @cats[user_input-1]
     end
-    puts "Which cat would you like to pick? Enter the number:"
-    user_input = gets.chomp.to_i
-    @cat = @cats[user_input-1]
   end
 
   def self.save(profile)
     File.open("././data/#{profile.user.email}", 'w') do |file|
       file.write("#{profile.user.email}, #{profile.pawz}, #{profile.tokens}, #{profile.wins}, #{profile.losses}, #{profile.competition_wins}\n")
     end
+    File.open("././data/#{profile.user.email}_cat", 'w') do |file|
+      file.write("#{profile.cat.name}, #{profile.cat.size}, #{profile.cat.energy}, #{profile.cat.confidence}, #{profile.cat.agility}, #{profile.cat.strength}\n")
+    end                     
   end
 
   def self.login(user, email)
