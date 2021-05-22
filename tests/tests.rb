@@ -6,26 +6,26 @@ require_relative('./lib/againstmice.rb')
 require_relative('./lib/competition.rb')
 
 
-def run_tests
-    christian = Cat.new("christian")
-    computer = Cat.new("computer")
-    Competition.arm_fight(christian, computer)
+# def run_tests
+#   christian = Cat.new("christian")
+#   computer = Cat.new("computer")
+#   Competition.arm_fight(christian, computer)
 
-    puts "-------------Start of run_tests--------------"
-    sparky = Cat.new("Sparky")
-    puts "TEST 1: Expect Sparky to be initalized to have 100 energy points.\n"
-    MyTest.expect_equal(sparky.energy, 100)
-    puts "TEST 2: Expect Againstmice game to run and return results.\n"
-    MyTest.expect_equal(Againstmice.run, Againstmice.results)
-    puts "TEST 3: Expect code to initalize players from file.\n"
-    puts "\t#{Player.all}"
-    puts "TEST 4: Expect that cat wins equal 69."
-    MyTest.expect_equal(christian.wins || computer.wins, 69)
-    puts "Cat Christian #{christian.wins} wins"
-    puts "Cat Computer #{computer.wins} wins"
-end
+#   puts "-------------Start of run_tests--------------"
+#   sparky = Cat.new("Sparky")
+#   puts "TEST 1: Expect Sparky to be initalized to have 100 energy points.\n"
+#   MyTest.expect_equal(sparky.energy, 100)
+#   puts "TEST 2: Expect Againstmice game to run and return results.\n"
+#   MyTest.expect_equal(Againstmice.run, Againstmice.results)
+#   puts "TEST 3: Expect code to initalize players from file.\n"
+#   puts "\t#{Player.all}"
+#   puts "TEST 4: Expect that cat wins equal 69."
+#   MyTest.expect_equal(christian.wins || computer.wins, 69)
+#   puts "Cat Christian #{christian.wins} wins"
+#   puts "Cat Computer #{computer.wins} wins"
+# end
 
-run_tests
+# run_tests
 
 
 # def test_player_setup

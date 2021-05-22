@@ -11,6 +11,41 @@ require_relative('./lib/pawz.rb')
 class App
   attr_reader :session
 
+  def self.login_ui
+    puts "Enter your email: "
+    email = gets.chomp
+    puts "Enter your password: "
+    password = gets.chomp
+    @session['login'] = User.login(email, password)
+    @session['profile'] = Player.login(@session['login'], email)
+    @session['profile'].select_cat
+    puts "Player 1's cat is...\n"
+    puts "#{@session['profile'].cat}"
+    puts "Player 1 Stats:\n"
+    puts @session['profile'].to_s
+    puts "Would you like to add player 2? Y/N"
+    user_input = gets.chomp
+    while true do
+      case user_input 
+      when 'q' || 'n'
+        break
+      when 'y'
+        puts "Enter your email: "
+        email = gets.chomp
+        puts "Enter your password: "
+        password = gets.chomp
+        @session['login2'] = User.login(email, password)
+        @session['profile2'] = Player.login(@session['login2'], email)
+        @session['profile2'].select_cat
+        puts "Player 2's cat is...\n"
+        puts "#{@session['profile2'].cat}"
+        puts "Player 1 Stats:\n"
+        puts @session['profile2'].to_s
+        break
+      end
+    end
+  end
+
   def self.against_mice_ui
     puts "Paw fight!!!"
     @session['profile'].tokens -= 1
@@ -73,18 +108,7 @@ class App
         break
       when 'l'
         # Todo: (revise) login, (feature) ability to have two users to log in.
-        puts "Enter your email: "
-        email = gets.chomp
-        puts "Enter your password: "
-        password = gets.chomp
-        @session['login'] = User.login(email, password)
-        @session['profile'] = Player.login(@session['login'], email)
-        @session['profile'].select_cat
-        puts "Your cat is...\n"
-        puts "#{@session['profile'].cat}"
-        puts "This is your current information:\n"
-        puts @session['profile'].to_s
-        # TODO: ADD MULTIPLAYER!!!
+        App.login_ui
         puts GAMEMENU
       when 'c'
       # Creates a new user with email and password.
