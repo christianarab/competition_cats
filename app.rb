@@ -11,6 +11,7 @@ require_relative('./lib/pawz.rb')
 class App
   attr_reader :session
 
+  # Login flow, gives option to load a second profile to session hash.
   def self.login_ui
     puts "Enter your email: "
     email = gets.chomp
@@ -39,7 +40,7 @@ class App
         @session['profile2'].select_cat
         puts "Player 2's cat is...\n"
         puts "#{@session['profile2'].cat}"
-        puts "Player 1 Stats:\n"
+        puts "Player 2 Stats:\n"
         puts @session['profile2'].to_s
         break
       end
