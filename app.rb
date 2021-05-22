@@ -112,18 +112,12 @@ class App
         App.login_ui
         puts GAMEMENU
       when 'c'
-      # Creates a new user with email and password.
         if @session['login'].instance_of?(User) == true
           puts "#{@session['login'].email} is logged in. Cannot create new account."
         else
-        puts "Create a new user!"
-        puts "Email address: "
-        email = gets.chomp
-        puts "Password: "
-        password = gets.chomp
         puts "Creating new user..."
-        user = User.new(email, password)
-        @session['login'] = User.new(email, password)
+        user = User.create
+        @session['login'] = user
         @session['profile'] = Player.new(user)
         Player.save(@session['profile'])
         @session['profile'].select_cat

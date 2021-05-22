@@ -10,6 +10,19 @@ class User
     @email, @encrypted_password = email, Encryption.encrypt(password)
   end
 
+  def self.create
+    puts "Please enter an e-mail address:"
+    email = gets.chomp
+    if User.find_by(email).instance_of?(User) == true
+      puts "Email already exists! Please use a different email"
+      create
+    else
+      puts "Enter a password"
+      password = gets.chomp 
+      User.new(email, password)
+    end
+  end
+
   def save
     File.open('././data/user', 'a') do |file|
       file.write("#{@email}, #{@encrypted_password}\n")
@@ -34,7 +47,7 @@ class User
         if user_email == email
           return User.new(user_email, encrypted_password.chomp)
         else
-          puts "No user found"
+          nil
         end
       end
     end
