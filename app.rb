@@ -84,14 +84,14 @@ class App
   def self.against_mice_ui
     puts "Paw fight!!!"
     @session['profile'].tokens -= 1
-    if Againstmice.run(@session['profile'].cat) == "win"
+    if Againstmice.run(@session['profile'].cat, @session['profile2'].cat) == "player 1 win"
       @session['profile'].wins += 1
       @session['profile'].tokens += 3
       puts "#{@session['profile'].cat.name} wins!\n"
       puts "#{@session['profile'].cat.name} total wins: #{@session['profile'].wins}\n"
       puts "#{@session['profile'].user.email} recieves 3 more tokens. Game token total: #{@session['profile'].tokens}\n"
       Player.save(@session['profile'])
-    else
+    elsif 
       puts "You lost! Try again"
       @session['profile'].losses += 1
       Player.save(@session['profile'])
@@ -132,12 +132,25 @@ class App
     end
   end
 
+  def self.stats_view
+    puts "Player 1 Stats:\n"
+    puts @session['profile'].to_s
+    puts "Player 1's cat is...\n"
+    puts "#{@session['profile'].cat}"
+    puts "Player 2 Stats:\n"
+    puts @session['profile2'].to_s
+    puts "Player 2's cat is...\n"
+    puts "#{@session['profile2'].cat}"
+  end
+
   def self.run
     @session = {}
+    @session['profile2'] = Player.computer
     puts "Running Competition Cats!"
     puts MENU
     App.main_menu_ui
     if @session['profile'].instance_of?(Player) == true
+      stats_view
       while true do
         puts GAMEMENU
         user_input = gets.chomp
@@ -145,16 +158,17 @@ class App
         when 'q'
           break
         when '1'
-          App.against_mice_ui
+          against_mice_ui
         when '2'
-          App.paw_fight_ui
+          paw_fight_ui
         when '3'
-          App.count_mice_ui
+          count_mice_ui
         when 'm'
           puts MENU
         when 'p'
           Pawz.trade(@session['profile'])
           Player.save(@session['profile'])
+          Player.save(@session['profile2'])
         end
       end
     else

@@ -9,7 +9,7 @@ class Cat
 
   attr_accessor :wins, :losses, :energy, :name, :strength, :size, :agility, :confidence
 
-  # Todo: clean up and finalize attributes of cat
+
   def initialize(name, size, energy, confidence, agility, strength)
     @name = name
     @size = ['small', 'medium', 'large'].sample
@@ -19,13 +19,14 @@ class Cat
     @strength = strength
   end
 
-  # Todo: revise save, creating association to player profile.
+  # Saves template starter cats
   def save
     File.open('././data/cats', 'a') do |file|
       file.write("#{@name}, #{@size}, #{energy}, #{confidence}, #{agility}, #{strength}\n")
     end
   end
 
+  # Loads starter cats
   def self.load 
     cats = []
     File.open('././data/cats', 'r') do |file|
@@ -80,6 +81,7 @@ class Cat
     end        
   end
 
+  # To string
   def to_s
     "name: #{@name}, size: #{@size}, energy: #{@energy}, agility: #{@agility}, strength: #{@strength}, confidence: #{@confidence}"
   end

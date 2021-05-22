@@ -1,1 +1,1 @@
-christian@gmail.com, -17900, 4, 6, 13, 0
+christian@gmail.com, -17900, 8, 8, 13, 0

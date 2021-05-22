@@ -30,39 +30,32 @@ class Againstmice
   end
 
   # Compete is used for each cat
-  def self.compete(*tally)
+  def self.compete(cat)
     @tally = 0
     mice1 = spawn
     mice2 = spawn
     mice1.zip(mice2).map do |x, y|
       if x > y
-        puts "Cat caught mouse!"
+        puts "#{cat.name} the cat caught mouse!"
         @tally += 1
       else
-        puts "Mouse ran away!"
+        puts "Mouse ran away! ~~(__^·>"
       end
     end
     @tally
   end
 
-  # Display results
-  def self.results(cat)
-    cat_1_chance_to_win = compete(cat)
-    cat_2_chance_to_win = compete(@computer)
+  # Runs game
+  def self.run(cat1, cat2)
+    cat_1_chance_to_win = compete(cat1)
+    cat_2_chance_to_win = compete(cat2)
 
     if cat_1_chance_to_win > cat_2_chance_to_win
-      puts "#{cat.name} wins, Computer looses!"
-      "win"
+      puts "#{cat1.name} wins!"
+      "player 1 win"
     else
-      puts "#{cat.name} looses!"
-      "lose"
+      puts "#{cat2.name} wins!"
+      "player 2 win"
     end
-  end
-
-  # Runs game
-  def self.run(cat)
-    spawn
-    compete
-    results(cat)
   end
 end

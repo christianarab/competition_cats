@@ -17,8 +17,11 @@ class Player
     @cat = nil
   end
 
-  def greeting
-    
+  def self.computer
+    @cats = Cat.load
+    computer = Player.new(User.new("Computer","Password"), pawz=400, tokens=5, wins=0, losses=0, competition_wins=0)
+    computer.cat = @cats[rand(0..3)]
+    computer
   end
 
   def select_cat(email)
