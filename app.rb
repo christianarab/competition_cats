@@ -12,6 +12,41 @@ class App
   attr_reader :session
 
   # Login flow, gives option to load a second profile to session hash.
+  def self.main_menu_ui
+    while true do
+      user_input = gets.chomp
+      case user_input
+      when 'q'
+        break
+      when 'l'
+        # Todo: (revise) login, (feature) ability to have two users to log in.
+        App.login_ui
+        break
+      when 'c'
+        if @session['login'].instance_of?(User) == true
+          puts "#{@session['login'].email} is logged in. Cannot create new account."
+        else
+        puts "Creating new user..."
+        user = User.create
+        @session['login'] = user
+        @session['profile'] = Player.new(user)
+        Player.save(@session['profile'])
+        @session['profile'].select_cat
+        puts "Your cat is...\n"
+        puts "#{@session['profile'].cat}"
+        puts "This is your current information:\n"
+        puts @session['profile'].to_s
+        user.save
+          if user.save
+            puts "User saved!"
+          else
+            puts "Something went wrong"
+          end
+        end
+      end
+    end
+  end
+
   def self.login_ui
     puts "Enter your email: "
     email = gets.chomp
@@ -25,10 +60,10 @@ class App
     puts "Player 1 Stats:\n"
     puts @session['profile'].to_s
     puts "Would you like to add player 2? Y/N"
-    user_input = gets.chomp
     while true do
+      user_input = gets.chomp
       case user_input 
-      when 'q' || 'n'
+      when 'n'
         break
       when 'y'
         puts "Enter your email: "
@@ -99,55 +134,32 @@ class App
   end
 
   def self.run
-    puts "Running Competition Cats!"
     @session = {}
+    puts "Running Competition Cats!"
     puts MENU
-    while true do
-      user_input = gets.chomp
-      case user_input
-      when 'q'
-        break
-      when 'l'
-        # Todo: (revise) login, (feature) ability to have two users to log in.
-        App.login_ui
+    App.main_menu_ui
+    if @session['profile'].instance_of?(Player) == true
+      while true do
         puts GAMEMENU
-      when 'c'
-        if @session['login'].instance_of?(User) == true
-          puts "#{@session['login'].email} is logged in. Cannot create new account."
-        else
-        puts "Creating new user..."
-        user = User.create
-        @session['login'] = user
-        @session['profile'] = Player.new(user)
-        Player.save(@session['profile'])
-        @session['profile'].select_cat
-        puts "Your cat is...\n"
-        puts "#{@session['profile'].cat}"
-        puts "This is your current information:\n"
-        puts @session['profile'].to_s
-        user.save
-          if user.save
-            puts "User saved!"
-          else
-            puts "Something went wrong"
-          end
+        user_input = gets.chomp
+        case user_input
+        when 'q'
+          break
+        when '1'
+          App.against_mice_ui
+        when '2'
+          App.paw_fight_ui
+        when '3'
+          App.count_mice_ui
+        when 'm'
+          puts MENU
+        when 'p'
+          puts PAWMARTMENU
         end
-        puts GAMEMENU
-      when '1'
-        App.against_mice_ui
-        puts GAMEMENU
-      when '2'
-        App.paw_fight_ui
-        puts GAMEMENU
-      when '3'
-        App.count_mice_ui
-        puts GAMEMENU
-      when 'm'
-        puts MENU
-      else
-        puts "It broke! ouch"
       end
-    end 
+    else
+      App.main_menu_ui
+    end
   end
 end
 
