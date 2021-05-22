@@ -1,4 +1,5 @@
 require_relative ('cat.rb')
+require_relative ('againstmice.rb')
 # Welcome to competition cats, were our furry (sometimes not) friends compete with their nine lives!
 # Competition is a series of games that create challenges for players' cats.
 # The cat that wins the most rounds out of 3 wins the competition.
@@ -44,6 +45,80 @@ class Competition
       end
     end
   end
+  ############################################
+  ############## AGAINST MICE ################
+  ############################################
+  def self.spawn
+    @mice = []
+    count = 100
+    while count > 0 do
+      agility = rand(1..100)
+      if agility < 100 && agility > 85
+        @mice << 3
+      elsif agility < 85 && agility > 60
+        @mice << 2
+      else
+        @mice << 1
+      end
+      @mice
+      count -= 1
+    end
+    @mice
+  end
+
+  def self.compete(cat)
+    @tally = 0
+    mice1 = spawn
+    mice2 = spawn
+    mice1.zip(mice2).map do |x, y|
+      if x > y
+        puts "#{cat.name} the cat caught mouse!"
+        @tally += 1
+      else
+        puts "Mouse ran away! ~~(__^·>"
+      end
+    end
+    @tally
+  end
+
+  def self.against_mice_run(cat1, cat2)
+    cat_1_chance_to_win = compete(cat1)
+    cat_2_chance_to_win = compete(cat2)
+
+    if cat_1_chance_to_win > cat_2_chance_to_win
+      puts "#{cat1.name} wins!"
+      "player 1 win"
+    else
+      puts "#{cat2.name} wins!"
+      "player 2 win"
+    end
+  end
+
+  def self.against_mice_ui(player_1, player_2)
+    puts "Paw fight!!!"
+    player_1.tokens -= 1
+    player_2.tokens -= 1
+    if against_mice_run(player_1.cat, player_2.cat) == "player 1 win"
+      player_2.losses += 1
+      player_1.wins += 1
+      player_1.tokens += 3
+      player_1.pawz += 25
+      puts "#{player_1.cat.name} total wins: #{player_1.wins}\n"
+      puts "#{player_1.user.email} recieves 3 more tokens and 25 pawz. Tokens: #{player_1.tokens} Pawz: #{player_1.pawz}\n"
+      Player.save(player_1)
+    elsif 
+      player_1.losses += 1
+      player_2.wins += 1
+      player_2.tokens += 3
+      player_2.pawz += 25
+      puts "#{player_2.cat.name} total wins: #{player_2.wins}\n"
+      puts "#{player_2.user.email} recieves 3 more tokens and 25 pawz. Tokens: #{player_2.tokens} Pawz: #{player_1.pawz}\n"
+      Player.save(player_1)
+    end
+  end
+
+  ############################################
+  ############################################
 
   # Todo: revise prize, and reward system
   def self.prize(player_1, player_2)

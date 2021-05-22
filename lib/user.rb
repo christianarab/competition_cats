@@ -31,7 +31,7 @@ class User
 
   def self.login(email, password)
     user = User.find_by(email)
-    if user == nil 
+    if user.nil?
       puts "There is no user try again."
     elsif user.encrypted_password == Encryption.encrypt(password)
       user
@@ -47,9 +47,9 @@ class User
         if user_email == email
           return User.new(user_email, encrypted_password.chomp)
         else
-          nil
         end
       end
     end
+    nil
   end
 end

@@ -46,7 +46,7 @@ class Againstmice
   end
 
   # Runs game
-  def self.run(cat1, cat2)
+  def self.run_againstmice(cat1, cat2)
     cat_1_chance_to_win = compete(cat1)
     cat_2_chance_to_win = compete(cat2)
 

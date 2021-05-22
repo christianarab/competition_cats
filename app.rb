@@ -49,52 +49,40 @@ class App
   def self.login_ui
     puts "Enter your email: "
     email = gets.chomp
-    puts "Enter your password: "
-    password = gets.chomp
-    @session['login'] = User.login(email, password)
-    @session['profile'] = Player.login(@session['login'], email)
-    @session['profile'].select_cat(email)
-    puts "Player 1's cat is...\n"
-    puts "#{@session['profile'].cat}"
-    puts "Player 1 Stats:\n"
-    puts @session['profile'].to_s
-    puts "Would you like to add player 2? Y/N"
-    while true do
-      user_input = gets.chomp
-      case user_input 
-      when 'n'
-        break
-      when 'y'
-        puts "Enter your email: "
-        email = gets.chomp
-        puts "Enter your password: "
-        password = gets.chomp
-        @session['login2'] = User.login(email, password)
-        @session['profile2'] = Player.login(@session['login2'], email)
-        @session['profile2'].select_cat(email)
-        puts "Player 2's cat is...\n"
-        puts "#{@session['profile2'].cat}"
-        puts "Player 2 Stats:\n"
-        puts @session['profile2'].to_s
-        break
+    if User.find_by(email).nil?
+      puts "Email not found try again"
+      login_ui
+    else
+      puts "Enter your password: "
+      password = gets.chomp
+      @session['login'] = User.login(email, password)
+      @session['profile'] = Player.login(@session['login'], email)
+      @session['profile'].select_cat(email)
+      puts "Player 1's cat is...\n"
+      puts "#{@session['profile'].cat}"
+      puts "Player 1 Stats:\n"
+      puts @session['profile'].to_s
+      puts "Would you like to add player 2? Y/N"
+      while true do
+        user_input = gets.chomp
+        case user_input 
+        when 'n'
+          break
+        when 'y'
+          puts "Enter your email: "
+          email = gets.chomp
+          puts "Enter your password: "
+          password = gets.chomp
+          @session['login2'] = User.login(email, password)
+          @session['profile2'] = Player.login(@session['login2'], email)
+          @session['profile2'].select_cat(email)
+          puts "Player 2's cat is...\n"
+          puts "#{@session['profile2'].cat}"
+          puts "Player 2 Stats:\n"
+          puts @session['profile2'].to_s
+          break
+        end
       end
-    end
-  end
-
-  def self.against_mice_ui
-    puts "Paw fight!!!"
-    @session['profile'].tokens -= 1
-    if Againstmice.run(@session['profile'].cat, @session['profile2'].cat) == "player 1 win"
-      @session['profile'].wins += 1
-      @session['profile'].tokens += 3
-      puts "#{@session['profile'].cat.name} wins!\n"
-      puts "#{@session['profile'].cat.name} total wins: #{@session['profile'].wins}\n"
-      puts "#{@session['profile'].user.email} recieves 3 more tokens. Game token total: #{@session['profile'].tokens}\n"
-      Player.save(@session['profile'])
-    elsif 
-      puts "You lost! Try again"
-      @session['profile'].losses += 1
-      Player.save(@session['profile'])
     end
   end
 
@@ -158,7 +146,7 @@ class App
         when 'q'
           break
         when '1'
-          against_mice_ui
+          Competition.against_mice_ui(@session['profile'], @session['profile2'])
         when '2'
           paw_fight_ui
         when '3'
