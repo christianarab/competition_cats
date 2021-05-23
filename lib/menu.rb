@@ -1,7 +1,11 @@
+require_relative ('player.rb')
 # menu.rb contains the CLI menus for Competition Cats.
 MENU = <<-menu
 
         Competition Cats
+
+
+
 ------------------------------------------------------------
    ﾐㅇ ༝ ㅇﾐ 
          
@@ -19,27 +23,32 @@ MENU = <<-menu
 menu
 
 GAMEMENU = <<-menu
-------------------------------------------------------------
-     
-                                           meow   ^ ↀᴥↀ ^ 
-   (1) practice: mice catching
-   (2) competition: paw fight
-   (3) competition: count mice
+
+
+--ﾐㅇ ༝ ㅇﾐ --------------------------------------------------
+            #{Player.greet} 
+                                             ﾐㅇ ༝ ㅇﾐ 
+   (1) practice: catch mice
+   (2) game: paw fight
+   (3) game: cat exam
+   (4) game: count mice
 
    (q) quit    (m) display menu     (p) pawzmart! $$$
 
-------------------------------------------------------------
+--------------------------ﾐㅇ ༝ ㅇﾐ --------------------------
 menu
 
 PAWMARTMENU = <<-menu
-------------------------------------------------------------
-ﾐ$ ༝ $ﾐ PAWMART
 
+
+------------------------------------------------------------
+ﾐ$ ༝ $ﾐ PAWMART                    
+                                          (b) balance
   Spend your pawz(pz) here!
 
-  (1)  300 pz  tunashake                  +10 strength
-  (2)  150 pz  catnip tea                 +15 confidence
-  (3)  400 pz  beyondmice burger          +15 strength
+  (1)  300 pz  tunashake                  +5 agility
+  (2)  150 pz  catnip tea                 +5 confidence
+  (3)  400 pz  beyondmice burger          +5 strength
   (4)  450 pz  +5 game tokens                
   (5)  500 pz  rename cat!  
 

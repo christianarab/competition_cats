@@ -12,9 +12,9 @@ class Cat
     @name = name
     @size = ['small', 'medium', 'large'].sample
     @energy = 100
-    @confidence = confidence
-    @agility = agility
-    @strength = strength
+    @confidence = starter_confidence
+    @agility = starter_agility
+    @strength = starter_strength
   end
 
   # Saves template starter cats
@@ -37,7 +37,7 @@ class Cat
   end
 
   # Agility determined by size of cat
-  def agility
+  def starter_agility
     base = 50
     case size
     when 'small'
@@ -51,7 +51,7 @@ class Cat
   end
 
   # Strength determined by size of cat
-  def strength
+  def starter_strength
     base = 50
     case size
     when 'large'
@@ -65,7 +65,7 @@ class Cat
   end
 
   # Confidence
-  def confidence
+  def starter_confidence
     # scale from 1 to 100
     base = 50
     current_confidence = base
@@ -77,6 +77,18 @@ class Cat
     else
       current_confidence
     end        
+  end
+
+  def add_str
+    @strength += 5
+  end
+
+  def add_agility
+    @agility += 5
+  end
+
+  def add_confidence
+    @confidence += 5
   end
 
   # To string

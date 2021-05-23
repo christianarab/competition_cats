@@ -5,9 +5,9 @@ require_relative('menu.rb')
 # Pawz is the currency of cats (and their human friends!). Collect pawz points by winning games.
 # Spend your pawz on power ups, name changes, and more!
 class Pawz
-  attr_accessor :pawz
+  attr_accessor :pawz, :cat
 
-  def pawz_bank
+  def self.pawz_bank(player)
     puts "welcome to the royal bank of pawz"
     puts "have you tried our new pawz eAccount? join today recieve free pawz rewards pawz"
     puts "Your pawz balance: #{player.pawz}"
@@ -30,10 +30,10 @@ class Pawz
           puts "You do not have enough pawz. Play some more games, meow!"
         else
           player.pawz -= 300
-          player.cat.strength += 10
+          player.cat.agility = player.cat.add_agility
           puts "Yum! That's a nice tunashake."
           puts "Your pawz balance: #{player.pawz}"
-          puts "Your cat's strength is now: #{player.cat.strength}"
+          puts "Your cat's agility is now: #{player.cat.agility}"
         end
       when '2'
         # catnip tea
@@ -42,7 +42,7 @@ class Pawz
           puts "You do not have enough pawz. Play some more games, meow!"
         else
           player.pawz -= 150
-          player.cat.confidence += 15
+          player.cat.add_confidence
           puts "Farout dude"
           puts "Your pawz balance: #{player.pawz}"
           puts "Your cat's confidence is now: #{player.cat.confidence}"
@@ -54,11 +54,10 @@ class Pawz
           puts "You do not have enough pawz. Play some more games, meow!"
         else
           player.pawz -= 400
-          player.cat.strength += 15
+          puts player.cat.add_str
           puts "It pays to be ethical"
           puts "Your pawz balance: #{player.pawz}"
           puts "Your cat's strength is now: #{player.cat.strength}"
-          player.cat.confidence
         end
       when '4'
         # 5 game tokens
@@ -84,6 +83,8 @@ class Pawz
           player.cat.name = new_name
           puts "Wow! What a nice name for #{player.cat.name}"
         end
+      when 'b'
+        pawz_bank(player)
       when 'm'
         break
       else

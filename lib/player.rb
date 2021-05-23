@@ -27,10 +27,10 @@ class Player
   def select_cat(email)
     @cats = Cat.load
 
-    if File.file?("././data/#{email}_cat")
-      f = File.open("././data/#{email}_cat", 'r') 
+    if File.file?("./data/#{email}_cat")
+      f = File.open("./data/#{email}_cat", 'r') 
       name, size, energy, confidence, agility, strength = f.readlines[0].split(", ")
-      @cat = Cat.new(name, size.to_i, energy.to_i, confidence.to_i, agility.to_i, strength.to_i)
+      @cat = Cat.new(name, size.to_s, energy.to_i, confidence.to_i, agility.to_i, strength.to_i)
     else
       puts "No cat found!"
       puts "Please select a cat:"
@@ -43,19 +43,42 @@ class Player
     end
   end
 
-  def self.save(profile)
-    File.open("././data/#{profile.user.email}", 'w') do |file|
-      file.write("#{profile.user.email}, #{profile.pawz}, #{profile.tokens}, #{profile.wins}, #{profile.losses}, #{profile.competition_wins}\n")
+  def self.save(player)
+    File.open("./data/#{player.user.email}", 'w') do |file|
+      file.write("#{player.user.email}, #{player.pawz}, #{player.tokens}, #{player.wins}, #{player.losses}, #{player.competition_wins}\n")
     end
-    File.open("././data/#{profile.user.email}_cat", 'w') do |file|
-      file.write("#{profile.cat.name}, #{profile.cat.size}, #{profile.cat.energy}, #{profile.cat.confidence}, #{profile.cat.agility}, #{profile.cat.strength}\n")
+    File.open("./data/#{player.user.email}_cat", 'w') do |file|
+      file.write("#{player.cat.name}, #{player.cat.size}, #{player.cat.energy}, #{player.cat.confidence}, #{player.cat.agility}, #{player.cat.strength}\n")
     end                     
   end
 
   def self.login(user, email)
-    f = File.open("././data/#{email}")
+    f = File.open("./data/#{email}")
     email, pawz, tokens, wins, losses, competition_wins = f.readlines[0].split(",")
-    profile = Player.new(user, pawz.to_i, tokens.to_i, wins.to_i, losses.to_i, competition_wins.to_i)
+    player = Player.new(user, pawz.to_i, tokens.to_i, wins.to_i, losses.to_i, competition_wins.to_i)
+  end
+
+  def self.greet
+    def self.range
+      if Time.now.hour < 12
+        "morning"
+      elsif Time.now.hour < 17
+        "afternoon"
+      elsif Time.now.hour < 21
+        "evening"
+      else
+        "night"
+      end
+    end
+
+    greetings = {
+      "morning" => "Meow! Morning! I want a can of tuna.",
+      "afternoon" => "Good after noon whiskers.",
+      "evening" => "Good evening, purrrrrrrrr",
+      "night" => "Meow time for some catnip and bed"
+    }
+    
+    "#{greetings[range]}\n"
   end
 
   def to_s

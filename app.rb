@@ -2,8 +2,6 @@ require_relative('./tests/my_tests.rb')
 require_relative('./lib/user.rb')
 require_relative('./lib/cat.rb')
 require_relative('./lib/player.rb')
-require_relative('./lib/playfight.rb')
-require_relative('./lib/againstmice.rb')
 require_relative('./lib/competition.rb')
 require_relative('./lib/menu.rb')
 require_relative('./lib/pawz.rb')
@@ -148,9 +146,11 @@ class App
         when '1'
           Competition.against_mice_ui(@session['profile'], @session['profile2'])
         when '2'
-          paw_fight_ui
+          Competition.paw_fight_ui(@session['profile'], @session['profile2'])
         when '3'
-          count_mice_ui
+          Competition.quiz_run(@session['profile'], @session['profile2'])
+        when '4'
+          Competition.count_mice_run(@session['profile'], @session['profile2'])
         when 'm'
           puts MENU
         when 'p'
