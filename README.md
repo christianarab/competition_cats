@@ -15,7 +15,7 @@ Once 'Player One' is logged in, 'Player Two' is able to sign in - allowing for a
 
 Cats act as your companions in Competition Cats. Each cat uniquely have both strengths and weaknesses.
 Cats have can be small, medium or large in size. Each cat has a unique points of agility, strength and confidence.
-Compete against the computer or other unique cats in Compeitition Cats!
+Compete against the computer or other unique cats in Competition Cats!
 By entering competitions and mini-games, the player is able to have a chance to collect pawz dollars to be spent in the PawzMart store.
 A player can upgrade their cat's traits, as well as change their cats name for future games!
 
@@ -39,7 +39,7 @@ You have nine tries to guess the number of mice in the room. There can be up to 
 
 ### Competition Mode
 
-Competitions are the focus of the game! Each round the players are prompted to either: attack, defend, or retreat (forefit). Using a highly sofisticated algorithm, a result outcome for each move is calculated based on the cats' traits and luck. For instance, if both cats decide to attack in a turn, the cat with the most strength at the given time of the move will over take the other. Each attack will inflict damage to the cat's energy level. After six rounds, the cat with the least energy looses the competition.
+Competitions are the focus of the game! Each round the players are prompted to either: attack, defend, or retreat (forfeit). Using a highly sophisticated  algorithm, a result outcome for each move is calculated based on the cats' traits and luck. For instance, if both cats decide to attack in a turn, the cat with the most strength at the given time of the move will over take the other. Each attack will inflict damage to the cat's energy level. After six rounds, the cat with the least energy looses the competition.
 
 ## PawzMart
 
