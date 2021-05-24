@@ -1,3 +1,4 @@
+# A modest algorithm to encrypt strings.
 module Encryption
   def self.encrypt(string)
     string.downcase

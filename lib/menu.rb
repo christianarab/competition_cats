@@ -1,10 +1,9 @@
 require_relative ('player.rb')
+require 'colorize'
 # menu.rb contains the CLI menus for Competition Cats.
 MENU = <<-menu
 
         Competition Cats
-
-
 
 ------------------------------------------------------------
    ﾐㅇ ༝ ㅇﾐ 
@@ -25,17 +24,18 @@ menu
 GAMEMENU = <<-menu
 
 
---ﾐㅇ ༝ ㅇﾐ --------------------------------------------------
-            #{Player.greet} 
-                                             ﾐㅇ ༝ ㅇﾐ 
+--#{"ﾐㅇ ༝ ㅇﾐ".colorize(:black)} --------------------------------------------------
+            #{Player.greet.colorize(:black)} 
+                                    #{"ﾐㅇ ༝ ㅇﾐ".colorize(:black)}
    (1) practice: catch mice
    (2) game: paw fight
    (3) game: cat exam
    (4) game: count mice
+   (5) play competition mode !
 
    (q) quit    (m) display menu     (p) pawzmart! $$$
 
---------------------------ﾐㅇ ༝ ㅇﾐ --------------------------
+--------------------------#{"ﾐㅇ ༝ ㅇﾐ".colorize(:black)} --------------------------
 menu
 
 PAWMARTMENU = <<-menu

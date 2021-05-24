@@ -6,7 +6,7 @@ require_relative('player.rb')
 # Cats are entered into competitions against mutliple human players and/or computer opponents.
 # Results of competitions are reflected through wins, looses, ties, and competition wins
 class Cat
-  attr_accessor :wins, :losses, :energy, :name, :strength, :size, :agility, :confidence
+  attr_accessor :wins, :losses, :energy, :name, :strength, :size, :agility, :confidence, :luck
 
   def initialize(name, size, energy, confidence, agility, strength)
     @name = name
@@ -19,7 +19,7 @@ class Cat
 
   # Saves template starter cats
   def save
-    File.open('././data/cats', 'a') do |file|
+    File.open('./data/cats', 'a') do |file|
       file.write("#{@name}, #{@size}, #{energy}, #{confidence}, #{agility}, #{strength}\n")
     end
   end
@@ -27,7 +27,7 @@ class Cat
   # Loads starter cats
   def self.load 
     cats = []
-    File.open('././data/cats', 'r') do |file|
+    File.open('./data/cats', 'r') do |file|
       file.each_line do |line|
         name, size, energy, confidence, agility, strength = line.split(", ")
         cats << Cat.new(name, size, energy, confidence, agility, strength.chomp)
@@ -77,6 +77,10 @@ class Cat
     else
       current_confidence
     end        
+  end
+
+  def move_luck
+    @luck = rand(1..6)
   end
 
   def add_str

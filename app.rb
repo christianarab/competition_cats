@@ -1,10 +1,10 @@
-require_relative('./tests/my_tests.rb')
 require_relative('./lib/user.rb')
 require_relative('./lib/cat.rb')
 require_relative('./lib/player.rb')
 require_relative('./lib/competition.rb')
 require_relative('./lib/menu.rb')
 require_relative('./lib/pawz.rb')
+require 'colorize'
 
 class App
   attr_reader :session
@@ -23,17 +23,17 @@ class App
         if @session['login'].instance_of?(User) == true
           puts "#{@session['login'].email} is logged in. Cannot create new account."
         else
-        puts "Creating new user..."
-        user = User.create
-        @session['login'] = user
-        @session['profile'] = Player.new(user)
-        Player.save(@session['profile'])
-        @session['profile'].select_cat
-        puts "Your cat is...\n"
-        puts "#{@session['profile'].cat}"
-        puts "This is your current information:\n"
-        puts @session['profile'].to_s
-        user.save
+          puts "Creating new user..."
+          user = User.create
+          @session['login'] = user
+          @session['profile'] = Player.new(user)
+          Player.save(@session['profile'])
+          @session['profile'].select_cat
+          puts "Your cat is...\n"
+          puts "#{@session['profile'].cat}"
+          puts "This is your current information:\n"
+          puts @session['profile'].to_s
+          user.save
           if user.save
             puts "User saved!"
           else
@@ -44,6 +44,7 @@ class App
     end
   end
 
+  # Login sequence. Assign second player session to human.
   def self.login_ui
     puts "Enter your email: "
     email = gets.chomp
@@ -84,79 +85,56 @@ class App
     end
   end
 
-  def self.paw_fight_ui
-    puts "Paw fight!!!"
-    @session['profile'].tokens -= 1
-    if Competition.paw_fight(@session['profile'].cat) == "win"
-      @session['profile'].wins += 1
-      @session['profile'].tokens += 3
-      puts "#{@session['profile'].cat.name} wins!\n"
-      puts "#{@session['profile'].cat.name} total wins: #{@session['profile'].wins}\n"
-      puts "#{@session['profile'].user.email} recieves 3 more tokens. Game token total: #{@session['profile'].tokens}\n"
-      Player.save(@session['profile'])
-    else
-      puts "You lost! Try again"
-      @session['profile'].losses += 1
-      Player.save(@session['profile'])
-    end
-  end
-
-  def self.count_mice_ui
-    puts "Paw fight!!!"
-    @session['profile'].tokens -= 1
-    if Competition.count_mice == "win"
-      @session['profile'].wins += 1
-      @session['profile'].tokens += 3
-      puts "#{@session['profile'].cat.name} wins!\n"
-      puts "#{@session['profile'].cat.name} total wins: #{@session['profile'].wins}\n"
-      puts "#{@session['profile'].user.email} recieves 3 more tokens. Game token total: #{@session['profile'].tokens}\n"
-      Player.save(@session['profile'])
-    else
-      puts "You lost! Try again"
-      @session['profile'].losses += 1
-      Player.save(@session['profile'])
-    end
-  end
-
+  # View the current stats of session players
   def self.stats_view
-    puts "Player 1 Stats:\n"
-    puts @session['profile'].to_s
-    puts "Player 1's cat is...\n"
-    puts "#{@session['profile'].cat}"
-    puts "Player 2 Stats:\n"
-    puts @session['profile2'].to_s
-    puts "Player 2's cat is...\n"
-    puts "#{@session['profile2'].cat}"
+    puts "Player 1 Stats:\n".colorize(:blue)
+    puts @session['profile'].to_s.colorize(:light_blue)
+    puts "\nPlayer 1's cat is...\n".colorize(:blue)
+    puts "#{@session['profile'].cat}".colorize(:light_blue)
+    puts "\n<:3)~~~~\t\t\t<:3)~~~~\t\t\t<:3)~~~~\n".colorize(:grey)
+    puts "\nPlayer 2 Stats:\n".colorize(:red)
+    puts @session['profile2'].to_s.colorize(:light_red)
+    puts "\nPlayer 2's cat is...\n".colorize(:red)
+    puts "#{@session['profile2'].cat}".colorize(:light_red)
   end
 
   def self.run
+    puts String.colors
     @session = {}
-    @session['profile2'] = Player.computer
+    @session['profile2'] = Player.computer # By default, player_2 profile is Computer
     puts "Running Competition Cats!"
-    puts MENU
-    App.main_menu_ui
+    puts MENU.colorize(:orange)
+    App.main_menu_ui # Runs Login/Create User/Player 2 selection
     if @session['profile'].instance_of?(Player) == true
       stats_view
       while true do
-        puts GAMEMENU
+        puts "#{GAMEMENU}".colorize(:background => :light_black)
         user_input = gets.chomp
         case user_input
         when 'q'
           break
         when '1'
           Competition.against_mice_ui(@session['profile'], @session['profile2'])
+          stats_view
         when '2'
           Competition.paw_fight_ui(@session['profile'], @session['profile2'])
+          stats_view
         when '3'
           Competition.quiz_run(@session['profile'], @session['profile2'])
+          stats_view
         when '4'
           Competition.count_mice_run(@session['profile'], @session['profile2'])
+          stats_view
+        when '5'
+          Competition.competition_mode(@session['profile'], @session['profile2'])
+          stats_view
         when 'm'
           puts MENU
         when 'p'
           Pawz.trade(@session['profile'])
           Player.save(@session['profile'])
           Player.save(@session['profile2'])
+          stats_view
         end
       end
     else

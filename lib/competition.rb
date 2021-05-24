@@ -1,8 +1,7 @@
 require_relative ('cat.rb')
 # Welcome to competition cats, were our furry (sometimes not) friends compete with their nine lives!
 # Competition is a series of games that create challenges for players' cats.
-# The cat that wins the most rounds out of 3 wins the competition.
-# To enter a competition, the player must use 1 player points. By winning a competition the player will earn a player point.
+# To enter a competition, the player must use 3 tokens. By winning a competition the player will earn double the tokens.
 class Competition
 
   ############################################
@@ -49,6 +48,7 @@ class Competition
     player_2.tokens -= 1
     @p1_score = 0
     @p2_score = 0
+
     while @p1_score || @p2_score < 3 do      
       count_mice(player_1) == 'win' ? @p1_score +=1 : @p1_score 
       count_mice(player_2) == 'win' ? @p2_score +=1 : @p2_score
@@ -176,39 +176,154 @@ class Competition
   def self.quiz(player)
     @score = 0
   
+    # The questions
     q1 = ["Cats can sweat through their paws: true or false?\n\tA) true\t\tB) false", 'a',"The correct answer is a! Cats sweat out of paws"]
     q2 = ["What is a name of a group of cats?\n\tA) School B) Shoaling C) Clowder D) Walering", 'c', "The correct answer is clowder. Also, known as 'glaring'!"]
     q3 = ["Toxoplasmosis is a parasitic disease that is transmittable through feline sexual reproduction:\n\tt for True/f for False?", 't', "The correct answer is true!"]  
     q4 = ["Fill in the blank: Denmark, 1995 -- the ___ Cat was born. The cat has been extensively researched, yet with no solid conclusion for it's unique trait:\n\tA) screaming B) tallest C) oldest D) Green", 'd', "The correct answer is Green."]
     q5 = ["How many bones do cats have?\n\tA)300 B)230 C)145 D)206", 'b', "Cats have 230 bones, a whopping 24 more bones than humans!"]
-    q6 = ["What is the name of a group of kittens?\n\tA) kindle B) krowder C) pawter D) Shoaling", 'a', "A group of kittens is called a “kindle."]
+    q6 = ["What is the name of a group of kittens?\n\tA) kindle B) krowder C) pawter D) Shoaling", 'a', "A group of kittens is called a 'kindle'."]
     q7 = ["Do indoor cats live longer than outdoor cats?\n\tt for True/f for False?", 't', "According to research indoor cats have a longer life span on average"]
     q8 = ["On average, how many whiskers does a cat have on ONE side of its face?\n\tA) 8 B) 9 C) 14 D)12", 'd',"There are roughly 24 whiskers, 12 on each side, on a cats face"]
-    q9 = ["On average, how many kittens does a mother have in one litter?\n\tA)1-2 B)2-3 C)3-4 5)6", 'b', "A mother cat usually gives birth to 2-3 per litter, and can have approx. 2 litters per year!"]
+    q9 = ["On average, how many kittens does a mother have in one litter?\n\tA)1-2 B)2-3 C)3-4 D)6", 'b', "A mother cat usually gives birth to 2-3 per litter, and can have approx. 2 litters per year!"]
     q10 = ["As the end of 2021, how old is the comic Garfield?\n\tA) 29 B) 35 C)43 D) 31", 'c', "Garfield launched on June 19, 1978 - making it 43 years old as of June!"]
   
+    # Questions in array
     questions = [q1, q2, q3, q4, q5, q6, q7, q8, q9, q10]
   
+    # Iterate over the questions in array: For each, print 0th element, ask and compare input to 1st element. If correct add 1 to score.
     for question in questions
-      puts question[0]
+      puts question[0].colorize(:red)
       answer = gets.chomp.downcase
-      puts question[2]
+      puts question[2].colorize(:light_green)
       if answer == question[1]
-        puts "You are correct"
+        puts "You are correct!"
         @score += 1
       else
-        puts "Better luck next time"
+        puts "Better luck next time."
       end
     end
     @score
   end 
 
   ############################################
+  ########### COMPETITION BATTLE #############
+  ############################################
+  
+  def self.turn(player)
+    puts "(a)ttack, (d)efend with paws, or (r)etreat"
+    user_input = gets.chomp
+    case user_input
+    when 'a'
+      'attack'
+    when 'd'
+      'defence'
+    when 'r'
+      'forfit'
+    end
+  end
+
+  def self.comp_run(player_1, player_2)
+    player_1.cat.strength = player_1.cat.strength * player_1.cat.move_luck
+    player_2.cat.strength = player_2.cat.strength * player_2.cat.move_luck
+    puts "player 1 turn choice: "
+    p1_move = turn(player_1)
+    # Computer or human turn
+    if player_2.user.email == 'Computer'
+      p2_move = ['attack', 'defence'].sample
+    else
+      puts "player 2 turn choice: "
+      p2_move = turn(player_2)
+    end
+    if p1_move && p2_move == 'attack'
+      puts "#{player_1.cat.name} and #{player_2.cat.name} both attacked!"
+      if player_1.cat.strength > player_2.cat.strength
+        puts "Attack successful! #{player_2.cat.name} is down! "
+        player_2.cat.energy -= 25
+      else player_1.cat.strength < player_2.cat.strength
+        puts "#{player_1.cat.name} took the damage! "
+        player_1.cat.energy -= 25
+      end
+    elsif p1_move == 'attack' && p2_move == 'defence'
+      puts "#{player_1.cat.name} attacked and #{player_2.cat.name} defended!"
+      if player_1.cat.strength > player_2.cat.agility
+        puts "Attack successful! #{player_2.cat.name} is down! "
+        player_2.cat.energy -= 25
+      else
+        puts "#{player_2.cat.name} over took the attack! "
+        player_1.cat.energy -= 25
+      end
+    elsif p2_move == 'attack' && p1_move == 'defence'
+      puts "#{player_2.cat.name} attacked and #{player_2.cat.name} defended!"
+      if player_2.cat.strength > player_1.cat.agility
+        puts "Attack successful! #{player_1.cat.name} is down! "
+        player_1.cat.energy -= 25
+      else
+        puts "#{player_1.cat.name} defended well! "
+        player_2.cat.energy -= 25
+      end
+    elsif p2_move == 'defence' && p1_move == 'defence' 
+      puts "You both defended! You are both scaredy cats!"
+    elsif p1_move == 'forfeit'
+      puts "#{player_1.cat.name} gives up!"
+      puts player_1.cat.energy -= 100
+    elsif p2_move == 'forfeit'
+      puts "#{player_2.cat.name} gives up!"
+      puts player_2.cat.energy -= 100
+    else
+      puts "Something went wrong!"
+    end
+  end
+
+  def self.competition_mode(player_1, player_2)
+    @p1_score = 0
+    @p2_score = 0
+    counter = 0
+    puts "The best out of 6 rounds wins the competition!"
+    while counter < 6 do
+        comp_run(player_1, player_2)
+        puts "#{player_1.cat.name}'s energy is at #{player_1.cat.energy}"
+        puts "#{player_2.cat.name}'s energy is at #{player_2.cat.energy}"
+        if player_1.cat.energy <= 0
+          @p2_score += 1
+        else player_2.cat.energy <= 0
+          @p1_score += 1
+        end
+      counter += 1
+    end
+    if @p1_score > @p2_score
+      puts "#{player_1.cat.name} wins the competition!"
+      puts "You earn 1 competition win and 500 pawz!"
+      player_1.competition_wins += 1
+      player_2.losses += 1
+      player_1.pawz += 500
+      player_1.cat.energy = 100 # resets energy
+      player_2.cat.energy = 100
+    else
+      puts "#{player_2.cat.name} wins the competition!"
+      puts "You earn 1 competition win and 500 pawz!"
+      player_2.competition_wins += 1
+      player_1.losses += 1
+      player_2.pawz += 500
+      player_1.cat.energy = 100
+      player_2.cat.energy = 100
+    end
+  end
+
+  # The winner of 3 battles will be deemed the winner 
+
+  ############################################
   ############## SCORE SYSTEM ################
   ############################################
   
+  def one_tokens(player_1, player_2)
+    if player_1.tokens || player_2.tokens < 1
+      puts "You are out of tokens"
+    end
+  end
+
   def self.winner_is?(p1=false, p2=false, player_1, player_2)
-    if p1 = true
+    if p1 == true
       player_2.losses += 1
       player_1.wins += 1
       player_1.tokens += 3
@@ -217,7 +332,7 @@ class Competition
       puts "#{player_1.user.email} recieves 3 more tokens and 25 pawz. Tokens: #{player_1.tokens} Pawz: #{player_1.pawz}\n"
       Player.save(player_1)
       Player.save(player_2)
-    elsif p2 = true
+    elsif p2 == true
       player_1.losses += 1
       player_2.wins += 1
       player_2.tokens += 3
@@ -232,6 +347,8 @@ class Competition
       player_2.wins += 1
       player_1.tokens += 3
       player_2.tokens += 3
+      Player.save(player_1)
+      Player.save(player_2)
     end
   end
 end
