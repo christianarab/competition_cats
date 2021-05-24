@@ -311,14 +311,14 @@ class Competition
       player_2.cat.strength = player_2.cat.strength * player_2.cat.move_luck
       puts "The best out of 6 rounds wins the competition!"
       while counter < 6 do
-          comp_run(player_1, player_2)
-          puts "#{player_1.cat.name}'s energy is at #{player_1.cat.energy}"
-          puts "#{player_2.cat.name}'s energy is at #{player_2.cat.energy}"
-          if player_1.cat.energy < player_2.cat.energy
-            @p2_score += 1
-          else player_2.cat.energy < player_1.cat.energy
-            @p1_score += 1
-          end
+        comp_run(player_1, player_2)
+        puts "#{player_1.cat.name}'s energy is at #{player_1.cat.energy}"
+        puts "#{player_2.cat.name}'s energy is at #{player_2.cat.energy}"
+        if player_1.cat.energy < player_2.cat.energy
+          @p2_score += 1
+        else player_2.cat.energy < player_1.cat.energy
+          @p1_score += 1
+        end
         counter += 1
       end
       if @p1_score > @p2_score
