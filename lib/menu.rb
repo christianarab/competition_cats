@@ -24,18 +24,18 @@ menu
 GAMEMENU = <<-menu
 
 
---#{"ﾐㅇ ༝ ㅇﾐ".colorize(:black)} --------------------------------------------------
-            #{Player.greet.colorize(:black)} 
-                                    #{"ﾐㅇ ༝ ㅇﾐ".colorize(:black)}
-   (1) practice: catch mice
-   (2) game: paw fight
-   (3) game: cat exam
-   (4) game: count mice
-   (5) play competition mode !
+--#{"ﾐㅇ ༝ ㅇﾐ".colorize(:black)} ----------------------------------------------------------------------------
+                              #{Player.greet.colorize(:black)} 
+                                                      #{"ﾐㅇ ༝ ㅇﾐ".colorize(:black)}
+                     (1) practice: paw fight             #{'watch ad and earn free tokens!'.colorize(:red)}
+                     (2) mini-game: catch mice           -1 token   
+                     (3) mini-game: CAT101 exam          -1 token 
+                     (4) mini-game: count mice           -1 token 
+                     (5) play competition mode!          -3 tokens
+         #{"ﾐㅇ ༝ ㅇﾐ".colorize(:black)}
+                     (q) quit    (m) display menu     (p) pawzmart! $$$
 
-   (q) quit    (m) display menu     (p) pawzmart! $$$
-
---------------------------#{"ﾐㅇ ༝ ㅇﾐ".colorize(:black)} --------------------------
+--------------------------#{"ﾐㅇ ༝ ㅇﾐ".colorize(:black)} ----------------------------------------------------
 menu
 
 PAWMARTMENU = <<-menu

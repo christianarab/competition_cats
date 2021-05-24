@@ -17,6 +17,7 @@ class Player
     @cat = nil
   end
 
+  # Instantiates computer profile.
   def self.computer
     @cats = Cat.load
     computer = Player.new(User.new("Computer","Password"), pawz=400, tokens=5, wins=0, losses=0, competition_wins=0)
@@ -24,6 +25,7 @@ class Player
     computer
   end
 
+  # Selects cat by email account
   def select_cat(email)
     @cats = Cat.load
 
@@ -58,6 +60,7 @@ class Player
     player = Player.new(user, pawz.to_i, tokens.to_i, wins.to_i, losses.to_i, competition_wins.to_i)
   end
 
+  # Greeting messages according to hour of day
   def self.greet
     def self.range
       if Time.now.hour < 12

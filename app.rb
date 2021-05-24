@@ -27,8 +27,8 @@ class App
           user = User.create
           @session['login'] = user
           @session['profile'] = Player.new(user)
+          @session['profile'].select_cat(@session['profile'].user.email)
           Player.save(@session['profile'])
-          @session['profile'].select_cat
           puts "Your cat is...\n"
           puts "#{@session['profile'].cat}"
           puts "This is your current information:\n"
@@ -36,6 +36,7 @@ class App
           user.save
           if user.save
             puts "User saved!"
+            puts "q to continue"
           else
             puts "Something went wrong"
           end
@@ -99,11 +100,10 @@ class App
   end
 
   def self.run
-    puts String.colors
     @session = {}
     @session['profile2'] = Player.computer # By default, player_2 profile is Computer
     puts "Running Competition Cats!"
-    puts MENU.colorize(:orange)
+    puts MENU.colorize(:blue)
     App.main_menu_ui # Runs Login/Create User/Player 2 selection
     if @session['profile'].instance_of?(Player) == true
       stats_view
@@ -114,10 +114,10 @@ class App
         when 'q'
           break
         when '1'
-          Competition.against_mice_ui(@session['profile'], @session['profile2'])
+          Competition.paw_fight_run(@session['profile'], @session['profile2'])
           stats_view
         when '2'
-          Competition.paw_fight_ui(@session['profile'], @session['profile2'])
+          Competition.against_mice_run(@session['profile'], @session['profile2'])
           stats_view
         when '3'
           Competition.quiz_run(@session['profile'], @session['profile2'])

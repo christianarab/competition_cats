@@ -10,7 +10,8 @@ class Competition
 
   def self.paw_fight_run(player_1, player_2)
     puts "This is a paw fight. Strongest paw grip wins!"
-    puts "meow paw fight!!!"
+    puts "meow paw fight!!! please check out our sponsor... "
+    puts "...try the new beyondmice burger from pawzmart〔◉⊥◉〕it's great!!".colorize(:red)
     cat_1_mod = (player_1.cat.strength * player_1.cat.confidence / 2) 
     player_1.cat.strength += cat_1_mod * rand(0..3)
     cat_2_mod = (player_2.cat.strength * player_2.cat.confidence / 2) 
@@ -26,10 +27,9 @@ class Competition
     end
   end
 
-  def self.paw_fight_ui(player_1, player_2)
+  def self.paw_fight_run(player_1, player_2)
     puts "Paw fight!!!"
-    player_1.tokens -= 1
-    player_2.tokens -= 1
+    puts "Earn free tokens and pawz by playing this game and watching our advertisement!"
     if paw_fight_run(player_1, player_2) == "player 1 win"
       winner_is?(p1=true, p2=false, player_1, player_2)
     else 
@@ -44,14 +44,28 @@ class Competition
   # Count mice is a game where players, have to guess the number of mice in the room.
 
   def self.count_mice_run(player_1, player_2)
-    player_1.tokens -= 1
-    player_2.tokens -= 1
-    @p1_score = 0
-    @p2_score = 0
+    if player_1.tokens < 1 
+      puts "#{player_1.user.email}: You need to earn more tokens!".colorize(:red)
+    else
+      player_1.tokens -= 1
+      player_2.tokens -= 1
+      @p1_score = 0
+      @p2_score = 0
+      @counter = 0
 
-    while @p1_score || @p2_score < 3 do      
-      count_mice(player_1) == 'win' ? @p1_score +=1 : @p1_score 
-      count_mice(player_2) == 'win' ? @p2_score +=1 : @p2_score
+      while @counter < 3
+        count_mice(player_1) == 'win' ? @p1_score +=1 : @p1_score 
+        count_mice(player_2) == 'win' ? @p2_score +=1 : @p2_score
+        @counter += 1
+      end
+
+      if @p1_score > @p2_score
+        puts "#{player_1.user.email} has won!"
+        self.winner_is?(p1=true, p2=false, player_1, player_2)
+      else
+        puts "#{player_2.user.email} has won!"
+        self.winner_is?(p1=false, p2=true, player_1, player_2)
+      end
     end
   end
 
@@ -84,6 +98,7 @@ class Competition
   ############## AGAINST MICE ################
   ############################################
 
+  # 100 mice are put in an array, with their own agility points
   def self.spawn
     @mice = []
     count = 100
@@ -117,7 +132,7 @@ class Competition
     @tally
   end
 
-  def self.against_mice_run(cat1, cat2)
+  def self.against_mice(cat1, cat2)
     cat_1_chance_to_win = compete(cat1)
     cat_2_chance_to_win = compete(cat2)
 
@@ -130,14 +145,18 @@ class Competition
     end
   end
 
-  def self.against_mice_ui(player_1, player_2)
+  def self.against_mice_run(player_1, player_2)
     puts "Paw fight!!!"
-    player_1.tokens -= 1
-    player_2.tokens -= 1
-    if against_mice_run(player_1.cat, player_2.cat) == "player 1 win"
-      winner_is?(p1=true, p2=false, player_1, player_2)
-    else 
-      winner_is?(p1=false, p2=true, player_1, player_2)
+    if player_1.tokens < 1 
+      puts "#{player_1.user.email}: You need to earn more tokens!".colorize(:red)
+    else
+      player_1.tokens -= 1
+      player_2.tokens -= 1
+      if against_mice(player_1.cat, player_2.cat) == "player 1 win"
+        winner_is?(p1=true, p2=false, player_1, player_2)
+      else 
+        winner_is?(p1=false, p2=true, player_1, player_2)
+      end
     end
   end
 
@@ -146,30 +165,34 @@ class Competition
   ############################################
 
   def self.quiz_run(player_1, player_2)
-    player_1.tokens -= 1
-    player_2.tokens -= 1
-    puts "Welcome to University of Cats CAT101 exam!"
-    puts "Meow, here is 10 feline questions."
-    puts "The cat to get the most points wins!"
+    if player_1.tokens < 1 
+      puts "#{player_1.user.email}: You need to earn more tokens!".colorize(:red)
+    else
+      player_1.tokens -= 1
+      player_2.tokens -= 1
+      puts "Welcome to University of Cats CAT101 exam!".colorize(:red)
+      puts "Meow, here is 10 feline questions."
+      puts "The cat to get the most points wins!"
 
-    puts "Player 1 up first! (psssss player 2 don't look please!)"
-    p1_score = quiz(player_1)
-    puts "#{player_1.user.email} scored #{p1_score} out of 10"
-    puts "Next up, Player 2!!!"
-    if player_2.user.email == "Computer"
-      puts "You are playing against a computer."
-      p2_score = rand(0..8)
-      puts "The computer scored #{p2_score} out of 10!"
-    else
-      p2_score = quiz(player_2)
-      puts "#{player_2.user.email} scored #{p2_score}"
-    end
-    if p1_score > p2_score
-      winner_is?(p1=true, p2=false, player_1, player_2)
-    elsif p2_score > p1_score
-      winner_is?(p1=false, p2=true, player_1, player_2)
-    else
-      winner_is?(p1=true, p2=true, player_1, player_2)
+      puts "Player 1 up first! (psssss player 2 don't look please!)".colorize(:green)
+      p1_score = quiz(player_1)
+      puts "#{player_1.user.email} scored #{p1_score} out of 10"
+      puts "Next up, Player 2!!!".colorize(:green)
+      if player_2.user.email == "Computer"
+        puts "You are playing against a computer."
+        p2_score = rand(0..8)
+        puts "The computer scored #{p2_score} out of 10!"
+      else
+        p2_score = quiz(player_2)
+        puts "#{player_2.user.email} scored #{p2_score}"
+      end
+      if p1_score > p2_score
+        winner_is?(p1=true, p2=false, player_1, player_2)
+      elsif p2_score > p1_score
+        winner_is?(p1=false, p2=true, player_1, player_2)
+      else
+        winner_is?(p1=true, p2=true, player_1, player_2)
+      end
     end
   end
 
@@ -191,7 +214,7 @@ class Competition
     # Questions in array
     questions = [q1, q2, q3, q4, q5, q6, q7, q8, q9, q10]
   
-    # Iterate over the questions in array: For each, print 0th element, ask and compare input to 1st element. If correct add 1 to score.
+    # Iterate over questions in array: For each, print 0th element, ask and compare input to 1st element. If correct add 1 to score.
     for question in questions
       puts question[0].colorize(:red)
       answer = gets.chomp.downcase
@@ -219,13 +242,11 @@ class Competition
     when 'd'
       'defence'
     when 'r'
-      'forfit'
+      'forfeit'
     end
   end
 
   def self.comp_run(player_1, player_2)
-    player_1.cat.strength = player_1.cat.strength * player_1.cat.move_luck
-    player_2.cat.strength = player_2.cat.strength * player_2.cat.move_luck
     puts "player 1 turn choice: "
     p1_move = turn(player_1)
     # Computer or human turn
@@ -276,37 +297,66 @@ class Competition
   end
 
   def self.competition_mode(player_1, player_2)
-    @p1_score = 0
-    @p2_score = 0
-    counter = 0
-    puts "The best out of 6 rounds wins the competition!"
-    while counter < 6 do
-        comp_run(player_1, player_2)
-        puts "#{player_1.cat.name}'s energy is at #{player_1.cat.energy}"
-        puts "#{player_2.cat.name}'s energy is at #{player_2.cat.energy}"
-        if player_1.cat.energy <= 0
-          @p2_score += 1
-        else player_2.cat.energy <= 0
-          @p1_score += 1
-        end
-      counter += 1
-    end
-    if @p1_score > @p2_score
-      puts "#{player_1.cat.name} wins the competition!"
-      puts "You earn 1 competition win and 500 pawz!"
-      player_1.competition_wins += 1
-      player_2.losses += 1
-      player_1.pawz += 500
-      player_1.cat.energy = 100 # resets energy
-      player_2.cat.energy = 100
+    if player_1.tokens < 3 
+      puts "#{player_1.user.email}: You need to earn more tokens!".colorize(:red)
     else
-      puts "#{player_2.cat.name} wins the competition!"
-      puts "You earn 1 competition win and 500 pawz!"
-      player_2.competition_wins += 1
-      player_1.losses += 1
-      player_2.pawz += 500
-      player_1.cat.energy = 100
-      player_2.cat.energy = 100
+      player_1.tokens -= 3
+      player_2.tokens -= 3
+      @p1_score = 0
+      @p2_score = 0
+      counter = 0
+      p1_start_strength = player_1.cat.strength 
+      p2_start_strength = player_2.cat.strength
+      player_1.cat.strength = player_1.cat.strength * player_1.cat.move_luck 
+      player_2.cat.strength = player_2.cat.strength * player_2.cat.move_luck
+      puts "The best out of 6 rounds wins the competition!"
+      while counter < 6 do
+          comp_run(player_1, player_2)
+          puts "#{player_1.cat.name}'s energy is at #{player_1.cat.energy}"
+          puts "#{player_2.cat.name}'s energy is at #{player_2.cat.energy}"
+          if player_1.cat.energy < player_2.cat.energy
+            @p2_score += 1
+          else player_2.cat.energy < player_1.cat.energy
+            @p1_score += 1
+          end
+        counter += 1
+      end
+      if @p1_score > @p2_score
+        puts "#{player_1.cat.name} wins the competition!"
+        puts "You earn 1 competition win, 3 tokens & 500 pawz!"
+        player_1.competition_wins += 1
+        player_2.losses += 1
+        player_1.tokens += 3
+        player_1.pawz += 500
+        player_1.cat.energy = 100 # resets energy and strength
+        player_2.cat.energy = 100
+        player_1.cat.strength = p1_start_strength
+        player_2.cat.strength = p1_start_strength
+      elsif @p2_score > @p1_score
+        puts "#{player_2.cat.name} wins the competition!"
+        puts "You earn 1 competition win, 3 tokens & 500 pawz!"
+        player_2.competition_wins += 1
+        player_1.losses += 1
+        player_1.tokens += 3
+        player_2.pawz += 500
+        player_1.cat.energy = 100
+        player_2.cat.energy = 100
+        player_1.cat.strength = p1_start_strength
+        player_2.cat.strength = p1_start_strength
+      else
+        puts "#{player_1.cat.name} and #{player_2.cat.name} have both tied!"
+        puts "Both earn 1 competition win, 3 tokens & 500 pawz!"
+        player_1.competition_wins += 1
+        player_2.competition_wins += 1
+        player_1.pawz += 500
+        player_2.pawz += 500
+        player_1.tokens += 3
+        player_2.tokens += 3
+        player_1.cat.energy = 100
+        player_2.cat.energy = 100
+        player_1.cat.strength = p1_start_strength
+        player_2.cat.strength = p1_start_strength
+      end
     end
   end
 
@@ -316,12 +366,6 @@ class Competition
   ############## SCORE SYSTEM ################
   ############################################
   
-  def one_tokens(player_1, player_2)
-    if player_1.tokens || player_2.tokens < 1
-      puts "You are out of tokens"
-    end
-  end
-
   def self.winner_is?(p1=false, p2=false, player_1, player_2)
     if p1 == true
       player_2.losses += 1

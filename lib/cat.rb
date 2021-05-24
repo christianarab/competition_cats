@@ -1,7 +1,7 @@
 require_relative('player.rb')
 
 # I hope you are a cat person... or atleast appeciate a cute one because this game is all about cats!
-# Cats act as your companions in Competition Cats. Each cat uniquely have both strength and weaknesses.
+# Cats act as your companions in Competition Cats. Each cat uniquely have both strengths and weaknesses.
 # Each cat should have a name, size, confidence, agility, and strength. These traits effect gameplay.
 # Cats are entered into competitions against mutliple human players and/or computer opponents.
 # Results of competitions are reflected through wins, looses, ties, and competition wins
@@ -36,7 +36,7 @@ class Cat
     cats
   end
 
-  # Agility determined by size of cat
+  # Starter agility determined by size of cat
   def starter_agility
     base = 50
     case size
@@ -50,7 +50,7 @@ class Cat
     @agility = base + bonus
   end
 
-  # Strength determined by size of cat
+  # Starter strength determined by size of cat
   def starter_strength
     base = 50
     case size
@@ -64,21 +64,13 @@ class Cat
     @strength = base + bonus
   end
 
-  # Confidence
+  # Starter confidence
   def starter_confidence
-    # scale from 1 to 100
-    base = 50
-    current_confidence = base
-    if current_confidence > 100
-      return 100
-    elsif
-      current_confidence < 1
-      return 1
-    else
-      current_confidence
-    end        
+    base = 50    
+    base
   end
 
+  # Competition luck component
   def move_luck
     @luck = rand(1..6)
   end
