@@ -17,13 +17,13 @@ class Playfight
     if cat_1_chance_to_win > cat_2_chance_to_win
       @cat1.wins += 1
       @cat2.losses += 1
-      return "#{@cat1.cat.name} wins!"
+      "win"
     elsif cat_1_chance_to_win < cat_2_chance_to_win
       @cat2.wins += 1
       @cat1.losses += 1
-      return "#{@cat2.cat.name} wins!"
+      "lose"
     else
-      return "it's a tie!!!"
+      "it's a tie!!!"
     end
   end
 end
