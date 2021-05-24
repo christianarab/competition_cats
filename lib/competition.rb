@@ -247,49 +247,49 @@ class Competition
   end
 
   def self.comp_run(player_1, player_2)
-    puts "player 1 turn choice: "
+    puts "#{player_1.user.email} turn. Select a choice:".colorize(:blue)
     p1_move = turn(player_1)
     # Computer or human turn
     if player_2.user.email == 'Computer'
       p2_move = ['attack', 'defence'].sample
     else
-      puts "player 2 turn choice: "
+      puts "#{player_2.user.email} turn. Select a choice:".colorize(:red)
       p2_move = turn(player_2)
     end
     if p1_move && p2_move == 'attack'
-      puts "#{player_1.cat.name} and #{player_2.cat.name} both attacked!"
+      puts "#{player_1.cat.name} and #{player_2.cat.name} both attacked!".colorize(:red)
       if player_1.cat.strength > player_2.cat.strength
-        puts "Attack successful! #{player_2.cat.name} is down! "
+        puts "Attack successful! #{player_2.cat.name} is down!".colorize(:red)
         player_2.cat.energy -= 25
       else player_1.cat.strength < player_2.cat.strength
-        puts "#{player_1.cat.name} took the damage! "
+        puts "#{player_1.cat.name} took the damage!".colorize(:red)
         player_1.cat.energy -= 25
       end
     elsif p1_move == 'attack' && p2_move == 'defence'
       puts "#{player_1.cat.name} attacked and #{player_2.cat.name} defended!"
       if player_1.cat.strength > player_2.cat.agility
-        puts "Attack successful! #{player_2.cat.name} is down! "
+        puts "Attack successful! #{player_2.cat.name} is down!".colorize(:red)
         player_2.cat.energy -= 25
       else
-        puts "#{player_2.cat.name} over took the attack! "
+        puts "#{player_2.cat.name} over took the attack!".colorize(:red)
         player_1.cat.energy -= 25
       end
     elsif p2_move == 'attack' && p1_move == 'defence'
       puts "#{player_2.cat.name} attacked and #{player_2.cat.name} defended!"
       if player_2.cat.strength > player_1.cat.agility
-        puts "Attack successful! #{player_1.cat.name} is down! "
+        puts "Attack successful! #{player_1.cat.name} is down!".colorize(:red)
         player_1.cat.energy -= 25
       else
         puts "#{player_1.cat.name} defended well! "
         player_2.cat.energy -= 25
       end
     elsif p2_move == 'defence' && p1_move == 'defence' 
-      puts "You both defended! You are both scaredy cats!"
+      puts "You both defended! You are both scaredy cats!".colorize(:red)
     elsif p1_move == 'forfeit'
-      puts "#{player_1.cat.name} gives up!"
+      puts "#{player_1.cat.name} gives up!".colorize(:red)
       puts player_1.cat.energy -= 100
     elsif p2_move == 'forfeit'
-      puts "#{player_2.cat.name} gives up!"
+      puts "#{player_2.cat.name} gives up!".colorize(:red)
       puts player_2.cat.energy -= 100
     else
       puts "Something went wrong!"
@@ -312,8 +312,8 @@ class Competition
       puts "The best out of 6 rounds wins the competition!"
       while counter < 6 do
         comp_run(player_1, player_2)
-        puts "#{player_1.cat.name}'s energy is at #{player_1.cat.energy}"
-        puts "#{player_2.cat.name}'s energy is at #{player_2.cat.energy}"
+        puts "#{player_1.cat.name}'s energy is at #{player_1.cat.energy}".colorize(:blue)
+        puts "#{player_2.cat.name}'s energy is at #{player_2.cat.energy}".colorize(:red)
         if player_1.cat.energy < player_2.cat.energy
           @p2_score += 1
         else player_2.cat.energy < player_1.cat.energy
@@ -322,8 +322,8 @@ class Competition
         counter += 1
       end
       if @p1_score > @p2_score
-        puts "#{player_1.cat.name} wins the competition!"
-        puts "You earn 1 competition win, 3 tokens & 500 pawz!"
+        puts "#{player_1.cat.name} wins the competition!".colorize(:blue)
+        puts "You earn 1 competition win, 3 tokens & 500 pawz!".colorize(:blue)
         player_1.competition_wins += 1
         player_2.losses += 1
         player_1.tokens += 3
@@ -333,8 +333,8 @@ class Competition
         player_1.cat.strength = p1_start_strength
         player_2.cat.strength = p1_start_strength
       elsif @p2_score > @p1_score
-        puts "#{player_2.cat.name} wins the competition!"
-        puts "You earn 1 competition win, 3 tokens & 500 pawz!"
+        puts "#{player_2.cat.name} wins the competition!".colorize(:red)
+        puts "You earn 1 competition win, 3 tokens & 500 pawz!".colorize(:red)
         player_2.competition_wins += 1
         player_1.losses += 1
         player_1.tokens += 3
@@ -344,8 +344,8 @@ class Competition
         player_1.cat.strength = p1_start_strength
         player_2.cat.strength = p1_start_strength
       else
-        puts "#{player_1.cat.name} and #{player_2.cat.name} have both tied!"
-        puts "Both earn 1 competition win, 3 tokens & 500 pawz!"
+        puts "#{player_1.cat.name} and #{player_2.cat.name} have both tied!".colorize(:green)
+        puts "Both earn 1 competition win, 3 tokens & 500 pawz!".colorize(:green)
         player_1.competition_wins += 1
         player_2.competition_wins += 1
         player_1.pawz += 500

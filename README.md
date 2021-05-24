@@ -5,6 +5,10 @@
 
 Welcome to Competition Cats! A **fun** feline text-based terminal game written in Ruby. Create a cat, play against other cats and compete to win rewards!
 
+## Installation
+
+Clone this repo and make sure you have Ruby gem [colorize](https://github.com/fazibear/colorize) installed for color prompts!
+
 ## Sign Up/Log In/Multiplayer Mode
 
 Create an account using the 'Create a New User' option in the main menu.
