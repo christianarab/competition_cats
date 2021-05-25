@@ -66,8 +66,7 @@ class Cat
 
   # Starter confidence
   def starter_confidence
-    base = 50    
-    base
+      50 
   end
 
   # Competition luck component
